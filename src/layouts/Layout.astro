@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+}
+
+const { title, description, canonical } = Astro.props;
+const site = new URL(Astro.site?.toString() || 'https://fincalcpro.com');
+const canonicalUrl = canonical ? new URL(canonical, site).toString() : Astro.url.href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
+
+    <meta name="robots" content="index, follow" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="border-b border-border bg-background">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="/" class="text-xl font-bold text-primary">FinCalc Pro</a>
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="/calculators/" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            Calculators
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="border-t border-border bg-muted mt-12">
+      <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="text-center text-sm text-muted-foreground">
+          <p class="mb-2">
+            This calculator is for informational purposes only and does not constitute financial advice.
+          </p>
+          <p>
+            &copy; {new Date().getFullYear()} FinCalc Pro. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

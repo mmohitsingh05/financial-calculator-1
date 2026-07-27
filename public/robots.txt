@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fincalcpro.com/sitemap-index.xml
