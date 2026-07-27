@@ -1,0 +1,65 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import FAQBlock from '@/components/calculators/FAQBlock.astro'
+import RelatedCalculators from '@/components/calculators/RelatedCalculators.astro'
+import type { ToolCategory } from '@/data/tools'
+
+export interface Props {
+  title: string
+  description: string
+  canonical?: string
+  toolName: string
+  category: ToolCategory
+  categoryName: string
+  toolDescription?: string
+  faqs?: { question: string; answer: string }[]
+  relatedSlug: string
+}
+
+const { title, description, canonical, toolName, category, categoryName, toolDescription, faqs, relatedSlug } = Astro.props
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Calculators', url: '/calculators/' },
+  { name: categoryName, url: `/calculators/${category}/` },
+  { name: toolName, url: '' },
+]
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  breadcrumbs={breadcrumbs}
+  faq={faqs}
+  toolName={toolName}
+  toolDescription={toolDescription}
+>
+  <article>
+    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{toolName}</h1>
+
+    <slot name="intro" />
+
+    <div class="my-8" id="calculator">
+      <slot name="calculator" />
+    </div>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <slot name="how-to-use" />
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <slot name="formula" />
+      </div>
+    </section>
+
+    {faqs && <FAQBlock faqs={faqs} />}
+
+    <RelatedCalculators currentSlug={relatedSlug} category={category} />
+  </article>
+</Layout>

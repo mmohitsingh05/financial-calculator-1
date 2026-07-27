@@ -1,0 +1,15 @@
+{
+  "year": 2026,
+  "solo401kLimit": 23500,
+  "catchUpLimit": 7500,
+  "catchUpAge": 50,
+  "totalLimitWithEmployer": 70000,
+  "rothIRALimit": 7000,
+  "rothIRACatchUpLimit": 1000,
+  "rothIRA MAGIStart": 150000,
+  "rothIRA MAGIEnd": 165000,
+  "traditionalIRA MAGIStart": 87000,
+  "traditionalIRA MAGIEnd": 107000,
+  "traditionalIRA MAGIStartMarried": 143000,
+  "traditionalIRA MAGIEndMarried": 173000
+}

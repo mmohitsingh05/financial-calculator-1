@@ -1,0 +1,31 @@
+---
+import { getRelatedTools } from '@/data/tools'
+import type { ToolCategory } from '@/data/tools'
+
+export interface Props {
+  currentSlug: string
+  category: ToolCategory
+}
+
+const { currentSlug, category } = Astro.props
+const related = getRelatedTools({ slug: currentSlug, category } as any, 6)
+---
+
+{
+  related.length > 0 && (
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-4">Related Calculators</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {related.map(tool => (
+          <a
+            href={`/calculators/${tool.category}/${tool.slug}/`}
+            class="block p-3 rounded-lg border border-border bg-card hover:border-primary/30 hover:bg-primary/5 transition-colors"
+          >
+            <p class="text-sm font-medium text-foreground">{tool.name}</p>
+            <p class="text-xs text-muted-foreground mt-0.5">{tool.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}
