@@ -1,0 +1,75 @@
+---
+export interface Props {
+  breadcrumbs?: { name: string; url: string }[]
+  faq?: { question: string; answer: string }[]
+  toolName?: string
+  toolDescription?: string
+}
+
+const { breadcrumbs, faq, toolName, toolDescription } = Astro.props
+const siteUrl = 'https://fincalcpro.com'
+---
+
+{
+  breadcrumbs && breadcrumbs.length > 0 && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((crumb, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: crumb.name,
+        item: crumb.url.startsWith('http') ? crumb.url : `${siteUrl}${crumb.url}`,
+      })),
+    })} />
+  )
+}
+
+{
+  faq && faq.length > 0 && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map(f => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: f.answer,
+        },
+      })),
+    })} />
+  )
+}
+
+{
+  toolName && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: toolName,
+      description: toolDescription || `${toolName} — Free online financial calculator`,
+      applicationCategory: 'FinanceApplication',
+      operatingSystem: 'All',
+      browserRequirements: 'Requires JavaScript',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    })} />
+  )
+}
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'FinCalc Pro',
+  url: siteUrl,
+  description: 'Free U.S. financial calculators for mortgages, loans, retirement, investing, salary, and more.',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${siteUrl}/search?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+})} />
