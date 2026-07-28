@@ -1,0 +1,46 @@
+---
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout
+  title="Contact Us - FinCalc Pro"
+  description="Have questions, suggestions, or feedback about our financial calculators? Get in touch with the FinCalc Pro team."
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Contact', url: '' },
+  ]}
+>
+  <div class="max-w-prose mx-auto">
+    <h1 class="text-3xl font-bold mb-6">Contact Us</h1>
+
+    <p class="text-lg text-muted-foreground mb-6">
+      We'd love to hear from you. Whether you have a question, found a bug, have a suggestion for a
+      new calculator, or just want to share feedback — we're here to help.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-4">Email</h2>
+    <p class="mb-4">
+      The best way to reach us is by email at:
+    </p>
+    <p class="mb-6 text-lg font-medium">
+      <a href="mailto:contact@fincalcpro.com" class="text-primary hover:underline">
+        contact@fincalcpro.com
+      </a>
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-4">What to Contact Us About</h2>
+    <ul class="list-disc pl-6 mb-4 space-y-1 text-muted-foreground">
+      <li><strong>Bug reports</strong> — Is a calculator giving unexpected results? Let us know and we'll investigate.</li>
+      <li><strong>Feature suggestions</strong> — Have an idea for a new calculator or an improvement to an existing one?</li>
+      <li><strong>Accuracy concerns</strong> — If you believe a formula or result is incorrect, please reach out so we can review it.</li>
+      <li><strong>General questions</strong> — Anything else about the site or our tools.</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-4">Response Time</h2>
+    <p class="mb-4">
+      We strive to respond to all inquiries within 1-2 business days. For faster assistance, please
+      include as much detail as possible in your message, including the specific calculator or page
+      you're referring to.
+    </p>
+  </div>
+</Layout>
