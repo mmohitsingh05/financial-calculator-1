@@ -1,0 +1,39 @@
+---
+title: Amortization Calculator
+slug: amortization-calculator
+category: loan
+tier: high
+description: Generate a complete amortization schedule showing every payment's principal, interest, and remaining balance over the life of your loan.
+primaryKeyword: amortization calculator
+secondaryKeywords:
+  - loan amortization schedule
+  - mortgage amortization calculator
+  - amortization table calculator
+faqs:
+  - question: What is a loan amortization schedule?
+    answer: An amortization schedule is a complete table of every loan payment over the full term, broken down by the portion that goes toward principal versus interest, plus the remaining balance after each payment. It shows you exactly how your loan balance declines over time and how much of each payment goes to interest versus principal — which shifts from mostly interest early on to mostly principal toward the end.
+  - question: Why do I pay more interest early in a loan?
+    answer: In the early years of an amortizing loan, your outstanding balance is highest, so the interest charged each month is also highest. Each payment covers all the interest that has accrued since your last payment, with the remainder going toward principal. As the principal balance decreases, the interest portion shrinks, and more of your fixed payment goes toward principal. This is called "front-loaded" interest and is the standard structure of amortizing loans.
+  - question: Can I download my amortization schedule?
+    answer: Yes, this calculator allows you to view your full amortization schedule on screen and download it as a CSV or print it. Having the schedule lets you track your loan progress, plan extra payments, and see exactly when you'll be debt-free. Many homeowners keep their amortization schedule for tax planning, since mortgage interest may be tax-deductible.
+---
+
+An **amortization calculator** provides complete transparency into how your loan works by generating a full payment-by-payment schedule. Unlike a simple payment calculator that only shows your monthly payment, this tool reveals exactly how much of each payment goes toward principal versus interest, how your loan balance declines over time, and how much total interest you'll pay — critical information for anyone with a mortgage, auto loan, or personal loan.
+
+## How to Use This Calculator
+
+Enter your loan amount, interest rate, and loan term in years or months. The calculator will generate a complete amortization table showing every payment period — typically monthly — with columns for payment number, payment amount, principal portion, interest portion, and remaining balance. You can scroll through the full schedule or jump to a specific year. The summary also shows total interest paid over the entire loan term.
+
+## How It's Calculated
+
+First, the monthly payment is calculated using the standard formula:
+
+**M = P × [ i(1+i)^N ] / [ (1+i)^N − 1 ]**
+
+Then for each period k from 1 to N:
+
+- Interest_k = Remaining_Balance_(k-1) × i
+- Principal_k = M − Interest_k
+- Remaining_Balance_k = Remaining_Balance_(k-1) − Principal_k
+
+Where **i** is the monthly interest rate (annual rate / 12) and **N** is the total number of payments. The schedule continues until the remaining balance reaches zero. For a 30-year mortgage, that's 360 rows — each showing the gradual shift from interest-heavy payments to principal-heavy ones.

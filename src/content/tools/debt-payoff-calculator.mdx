@@ -1,0 +1,39 @@
+---
+title: Debt Payoff Calculator (Snowball vs. Avalanche)
+slug: debt-payoff-calculator
+category: general-finance
+tier: medium
+description: Compare snowball vs. avalanche debt payoff methods. Find the fastest and most motivating strategy to become debt-free.
+primaryKeyword: debt payoff calculator
+secondaryKeywords:
+  - debt snowball calculator
+  - debt avalanche calculator
+  - debt free calculator
+faqs:
+  - question: What's the difference between the snowball and avalanche method?
+    answer: The snowball method prioritizes debts by smallest balance first — you pay minimums on everything and throw extra money at the smallest debt until it's gone, then roll that payment to the next smallest. The avalanche method prioritizes by highest interest rate first — mathematically, this saves the most money in total interest. Snowball is better for motivation (quick wins), while avalanche is mathematically optimal (lowest total cost).
+  - question: Which debt payoff method saves the most money?
+    answer: The avalanche method always saves the most money because it targets the highest-interest debt first, minimizing total interest paid. However, the difference can be small if your debts have similar interest rates. For example, on three debts totaling $15,000, avalanche might save a few hundred dollars compared to snowball over the repayment period. The best method is ultimately the one you'll stick with consistently.
+  - question: Which method keeps me most motivated?
+    answer: The snowball method is generally more motivating because you get quick wins — paying off smaller debts first gives you a psychological boost and a sense of progress. Seeing a debt eliminated entirely can be incredibly satisfying and keeps you motivated to continue. Many people, including financial experts like Dave Ramsey, recommend snowball for this reason. The best method is whichever one you'll actually follow through on consistently.
+  - question: How do I start a debt payoff plan?
+    answer: Start by listing all your debts with balances, interest rates, and minimum payments. Choose a method (snowball or avalanche) and decide how much extra you can put toward debt each month. Commit to paying the minimum on all debts, then put all extra money toward the first target debt. When it's paid off, roll its full payment (minimum + extra) to the next target. Track your progress — seeing the balances drop is powerful motivation.
+---
+
+A **debt payoff calculator** helps you choose and visualize the best strategy for becoming debt-free. Whether you're tackling credit cards, student loans, car loans, or a mix of debts, this tool compares the two most popular payoff methods — snowball and avalanche — side by side. You'll see exactly how much each strategy costs in total interest and how long each takes to reach debt freedom.
+
+## How to Use This Calculator
+
+Enter all your debts — one by one — with each debt's current balance, APR, and minimum monthly payment. Then enter the total extra amount you can put toward debt repayment each month. The calculator will generate two side-by-side payoff plans: snowball (lowest balance first) and avalanche (highest APR first). Compare total months to debt-free, total interest paid, and the payoff timeline for each method.
+
+## How It's Calculated
+
+Given a list of debts [{balance, APR, minimum_payment}, ...] and an extra monthly amount E:
+
+**Avalanche:** Sort debts by APR descending. Apply minimums to all debts; all extra E goes to the highest-APR debt until paid off, then its full payment rolls to the next-highest-APR debt.
+
+**Snowball:** Identical mechanics, but sort by balance ascending (smallest first) instead of APR.
+
+The simulation runs the same iterative payoff logic as the credit card calculator across all debts simultaneously:
+
+Total Months to Debt-Free and Total Interest Paid (sum across all debts) are tracked. The avalanche method always produces equal or lower total interest mathematically, while snowball typically feels more motivating due to faster psychological wins.

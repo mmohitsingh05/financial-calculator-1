@@ -1,0 +1,41 @@
+---
+title: Credit Card Payoff Calculator
+slug: credit-card-payoff-calculator
+category: general-finance
+tier: high
+description: Find out how long it takes to pay off credit card debt. See total interest paid and how extra payments accelerate your debt freedom.
+primaryKeyword: credit card payoff calculator
+secondaryKeywords:
+  - credit card interest calculator
+  - credit card debt calculator
+  - minimum payment calculator
+faqs:
+  - question: How long will it take to pay off my credit card at minimum payments?
+    answer: Paying only the minimum can keep you in debt for decades. On a $5,000 balance at 20% APR with a 2% minimum payment, it would take over 30 years and cost more than $8,000 in interest — far exceeding the original balance. This is because most of your minimum payment goes toward interest, with very little reducing the principal. The exact time depends on the balance, APR, and the minimum payment formula (typically 1–3% of the balance or a flat $25–$35).
+  - question: How much interest will I pay total?
+    answer: Total interest depends on your balance, APR, and payment strategy. A $10,000 balance at 22% APR paid at the 2% minimum would cost over $18,000 in interest and take more than 30 years. The same balance paid at $350 per month would cost about $4,400 in interest and be paid off in about 3.5 years. Every dollar above the minimum payment goes directly to reducing principal, saving you significant interest.
+  - question: How much faster can I pay it off with extra payments?
+    answer: Even small extra payments make a dramatic difference. On a $10,000 balance at 20% APR, paying the 2% minimum takes 40+ years with $22,000+ in interest. Increasing your payment to $250/month cuts that to 5 years with $5,000 in interest — saving over $17,000. At $400/month, you're debt-free in under 3 years with $2,700 in interest. Use this calculator to find the payment amount that fits your budget and see exactly how much sooner you'll be debt-free.
+---
+
+A **credit card payoff calculator** is a powerful motivator for getting out of debt. Credit cards typically charge the highest interest rates of any common debt — averaging 20–28% APR — and making only minimum payments can keep you trapped in debt for decades. This calculator shows you exactly how different payment strategies affect your payoff timeline and total interest, so you can choose the approach that works best for you.
+
+## How to Use This Calculator
+
+Enter your current credit card balance, APR (annual interest rate), and your monthly payment amount. You can choose to calculate with the minimum payment only or enter a fixed payment amount. The calculator will show how many months until your balance reaches zero, the total interest paid, and a year-by-year payoff chart. Try different payment amounts to see how much faster you can become debt-free.
+
+## How It's Calculated
+
+Credit cards typically compound daily but bill monthly. This calculator uses a monthly periodic rate approximation:
+
+**i = APR / 12**
+
+For each month:
+- Interest_month = Remaining_Balance × i
+- Principal_paid_month = Payment − Interest_month
+- Remaining_Balance_new = Remaining_Balance − Principal_paid_month
+
+If "minimum payment" is selected, each month's minimum is calculated as:
+Minimum Payment = max(Remaining_Balance × min_payment_percentage, flat_minimum_dollar)
+
+The simulation repeats until Remaining_Balance ≤ 0, tracking months to payoff and total interest paid.

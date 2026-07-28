@@ -1,0 +1,54 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import FAQBlock from '@/components/calculators/FAQBlock.astro'
+import RelatedCalculators from '@/components/calculators/RelatedCalculators.astro'
+import { getToolBySlug, getCategoryBySlug, getRelatedTools } from '@/data/tools'
+import { getCollection } from 'astro:content'
+import { MortgageCalculator } from '@/components/calculators/mortgage-calculator/index.tsx'
+
+const tool = getToolBySlug('mortgage-calculator')!
+const category = getCategoryBySlug(tool.category)!
+const related = getRelatedTools(tool)
+const [entry] = await getCollection('tools', ({ id }) => id === 'mortgage-calculator')
+const { data } = entry
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Calculators', url: '/calculators/' },
+  { name: category.name, url: `/calculators/${category.slug}/` },
+  { name: tool.name, url: '' },
+]
+---
+
+<Layout title={`${tool.name} - Estimate Your Monthly Payment | FinCalc Pro`} description={tool.description} breadcrumbs={breadcrumbs} faq={data.faqs} toolName={tool.name} toolDescription={tool.description}>
+  <article>
+    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{tool.name}</h1>
+
+    <p class="text-muted-foreground mb-8">
+      A <strong>mortgage calculator</strong> helps you estimate your monthly home loan payment including principal, interest, property taxes, and insurance. Whether you're a first-time homebuyer or refinancing, know your costs before you apply.
+    </p>
+
+    <div class="my-8" id="calculator">
+      <MortgageCalculator client:load />
+    </div>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Enter the home price, your down payment, the interest rate, and the loan term in years. Add your annual property tax and homeowners insurance for a complete picture. Click Calculate to see your total monthly payment (PITI: Principal, Interest, Taxes, Insurance), a breakdown of each component, and a full loan summary including total interest paid over the life of the loan.</p>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>The monthly payment uses the standard amortization formula:</p>
+        <p class="font-mono text-sm bg-muted p-3 rounded">M = P × [ i(1+i)^N ] / [ (1+i)^N − 1 ]</p>
+        <p>Where P is the loan amount (home price minus down payment), i is the monthly interest rate (annual rate / 12), and N is the total number of monthly payments (years × 12). The total monthly payment shown includes principal, interest, property tax (annual / 12), and homeowners insurance (annual / 12).</p>
+      </div>
+    </section>
+
+    {data.faqs && <FAQBlock faqs={data.faqs} />}
+
+    <RelatedCalculators currentSlug={tool.slug} category={tool.category} />
+  </article>
+</Layout>

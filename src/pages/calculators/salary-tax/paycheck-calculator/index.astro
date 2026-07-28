@@ -1,0 +1,51 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import FAQBlock from '@/components/calculators/FAQBlock.astro'
+import RelatedCalculators from '@/components/calculators/RelatedCalculators.astro'
+import { getToolBySlug, getCategoryBySlug } from '@/data/tools'
+import { getCollection } from 'astro:content'
+import { PaycheckCalculator } from '@/components/calculators/paycheck-calculator/index.tsx'
+
+const tool = getToolBySlug('paycheck-calculator')!
+const category = getCategoryBySlug(tool.category)!
+const [entry] = await getCollection('tools', ({ id }) => id === 'paycheck-calculator')
+const { data } = entry ?? { data: { faqs: [] } }
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Calculators', url: '/calculators/' },
+  { name: category.name, url: `/calculators/${category.slug}/` },
+  { name: tool.name, url: '' },
+]
+---
+
+<Layout title="Paycheck Calculator - Estimate Your Take-Home Pay | FinCalc Pro" description={tool.description} breadcrumbs={breadcrumbs} faq={data.faqs} toolName={tool.name} toolDescription={tool.description}>
+  <article>
+    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{tool.name}</h1>
+
+    <p class="text-muted-foreground mb-8">
+      A <strong>paycheck calculator</strong> helps you estimate your take-home pay after federal and state taxes, FICA, and other deductions. Know exactly what you'll earn per period and plan your budget with confidence.
+    </p>
+
+    <div class="my-8" id="calculator">
+      <PaycheckCalculator client:load />
+    </div>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Enter your annual salary, the number of pay periods per year (26 for biweekly, 24 for semi-monthly, 52 for weekly), your state tax rate, 401(k) contribution percentage, and any per-period deductions like health insurance. Click Calculate to see your gross pay, each deduction broken out, and your net take-home pay per period.</p>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Gross pay per period is your annual salary divided by the number of pay periods. Federal income tax is computed using progressive tax brackets applied pro-rata per period. FICA taxes include Social Security (6.2% up to the wage base) and Medicare (1.45% plus 0.9% for high earners). State tax is a flat percentage of gross pay. Net pay is gross pay minus all deductions.</p>
+      </div>
+    </section>
+
+    {data.faqs && <FAQBlock faqs={data.faqs} />}
+
+    <RelatedCalculators currentSlug={tool.slug} category={tool.category} />
+  </article>
+</Layout>

@@ -1,0 +1,37 @@
+---
+title: Loan Payoff Calculator
+slug: loan-payoff-calculator
+category: loan
+tier: medium
+description: See how extra payments can accelerate your loan payoff. Calculate interest savings and find your debt-free date.
+primaryKeyword: loan payoff calculator
+secondaryKeywords:
+  - early loan payoff calculator
+  - extra payment calculator
+  - loan prepayment calculator
+faqs:
+  - question: How much can I save by paying extra toward my loan?
+    answer: Even small extra payments can save thousands in interest. For example, on a $250,000 mortgage at 6% for 30 years, paying an extra $100 per month saves over $35,000 in interest and cuts nearly 5 years off the loan. The earlier you start making extra payments, the greater the savings because you're reducing the principal that future interest is calculated on.
+  - question: Are there prepayment penalties?
+    answer: Some lenders charge prepayment penalties, typically on certain types of loans like subprime mortgages or some personal loans. Federal law prohibits prepayment penalties on most FHA and VA loans, and many conventional loans no longer charge them. Always check your loan contract — if there's a penalty, calculate whether the interest savings from paying early exceed the penalty amount. Most mortgages allow you to pay up to 20% of the principal annually without penalty.
+  - question: How does one extra payment a year affect payoff time?
+    answer: Making one extra mortgage payment per year — essentially 13 payments instead of 12 — can shorten a 30-year mortgage by 4 to 5 years and save tens of thousands in interest. The simplest way to do this is to divide your monthly payment by 12 and add that amount to each payment, or make biweekly payments (half the monthly payment every two weeks, resulting in 26 half-payments = 13 full payments per year).
+---
+
+A **loan payoff calculator** shows you the incredible power of extra payments. Whether you have a mortgage, auto loan, student loan, or personal loan, paying even a little extra each month can shave years off your repayment term and save you thousands in interest. This calculator lets you experiment with different extra payment amounts to find the strategy that works best for your budget.
+
+## How to Use This Calculator
+
+Enter your current loan balance, interest rate, and remaining term. Then choose your extra payment strategy — a fixed extra amount each month, a one-time lump sum, or an annual extra payment. The calculator will compare your current payoff schedule against the accelerated schedule, showing your new payoff date, total interest saved, and how much sooner you'll be debt-free.
+
+## How It's Calculated
+
+This calculator runs an iterative month-by-month simulation using standard amortization logic, but each period includes:
+
+- Remaining_Balance_k = Remaining_Balance_(k-1) − Principal_k − Extra_Payment
+
+The simulation stops when Remaining_Balance ≤ 0. The output includes:
+- New payoff date (in months) vs. original term
+- Interest Saved = Original_Total_Interest − New_Total_Interest
+
+This iterative approach accurately handles any extra payment pattern — fixed monthly amounts, lump sums, or recurring annual payments.

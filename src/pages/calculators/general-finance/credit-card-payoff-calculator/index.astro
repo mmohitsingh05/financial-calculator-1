@@ -1,0 +1,51 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import FAQBlock from '@/components/calculators/FAQBlock.astro'
+import RelatedCalculators from '@/components/calculators/RelatedCalculators.astro'
+import { getToolBySlug, getCategoryBySlug } from '@/data/tools'
+import { getCollection } from 'astro:content'
+import { CreditCardPayoffCalculator } from '@/components/calculators/credit-card-payoff-calculator/index.tsx'
+
+const tool = getToolBySlug('credit-card-payoff-calculator')!
+const category = getCategoryBySlug(tool.category)!
+const [entry] = await getCollection('tools', ({ id }) => id === 'credit-card-payoff-calculator')
+const { data } = entry ?? { data: { faqs: [] } }
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Calculators', url: '/calculators/' },
+  { name: category.name, url: `/calculators/${category.slug}/` },
+  { name: tool.name, url: '' },
+]
+---
+
+<Layout title="Credit Card Payoff Calculator - Get Debt Free Faster | FinCalc Pro" description={tool.description} breadcrumbs={breadcrumbs} faq={data.faqs} toolName={tool.name} toolDescription={tool.description}>
+  <article>
+    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{tool.name}</h1>
+
+    <p class="text-muted-foreground mb-8">
+      A <strong>credit card payoff calculator</strong> shows you how long it takes to become debt-free. Compare making minimum payments versus a fixed monthly payment to see how much interest you can save.
+    </p>
+
+    <div class="my-8" id="calculator">
+      <CreditCardPayoffCalculator client:load />
+    </div>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Enter your current credit card balance, APR, your desired monthly payment, and the minimum payment percentage. The calculator compares two scenarios side by side: paying only the minimum versus your chosen payment amount, showing months to payoff and total interest for each.</p>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>A month-by-month simulation applies the monthly periodic rate (APR / 12) to the remaining balance. Each month's interest is subtracted from the payment; the remainder reduces the principal. The simulation repeats until the balance reaches zero, tracking total months and cumulative interest paid.</p>
+      </div>
+    </section>
+
+    {data.faqs && <FAQBlock faqs={data.faqs} />}
+
+    <RelatedCalculators currentSlug={tool.slug} category={tool.category} />
+  </article>
+</Layout>

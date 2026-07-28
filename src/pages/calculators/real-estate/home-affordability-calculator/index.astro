@@ -1,0 +1,51 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import FAQBlock from '@/components/calculators/FAQBlock.astro'
+import RelatedCalculators from '@/components/calculators/RelatedCalculators.astro'
+import { getToolBySlug, getCategoryBySlug } from '@/data/tools'
+import { getCollection } from 'astro:content'
+import { HomeAffordabilityCalculator } from '@/components/calculators/home-affordability-calculator/index.tsx'
+
+const tool = getToolBySlug('home-affordability-calculator')!
+const category = getCategoryBySlug(tool.category)!
+const [entry] = await getCollection('tools', ({ id }) => id === 'home-affordability-calculator')
+const { data } = entry ?? { data: { faqs: [] } }
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Calculators', url: '/calculators/' },
+  { name: category.name, url: `/calculators/${category.slug}/` },
+  { name: tool.name, url: '' },
+]
+---
+
+<Layout title="Home Affordability Calculator - How Much House Can You Afford? | FinCalc Pro" description={tool.description} breadcrumbs={breadcrumbs} faq={data.faqs} toolName={tool.name} toolDescription={tool.description}>
+  <article>
+    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{tool.name}</h1>
+
+    <p class="text-muted-foreground mb-8">
+      A <strong>home affordability calculator</strong> helps you determine how much house you can afford based on your income, debts, and down payment. Using the 28/36 rule, get a lender-approved budget before you start house hunting.
+    </p>
+
+    <div class="my-8" id="calculator">
+      <HomeAffordabilityCalculator client:load />
+    </div>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Enter your annual household income, monthly debt payments, down payment amount, expected interest rate, loan term, annual property tax rate, and annual home insurance. The calculator will show your maximum affordable home price, estimated monthly payment, and how the 28/36 rule applies to your situation.</p>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>The 28/36 rule determines your maximum housing payment: 28% of gross monthly income for housing (front-end) and 36% for total debt including housing (back-end). The amortization formula is solved in reverse to find the maximum loan amount given your affordable monthly payment, then your down payment is added to find the maximum home price.</p>
+      </div>
+    </section>
+
+    {data.faqs && <FAQBlock faqs={data.faqs} />}
+
+    <RelatedCalculators currentSlug={tool.slug} category={tool.category} />
+  </article>
+</Layout>

@@ -1,0 +1,39 @@
+---
+title: Retirement Savings Calculator
+slug: retirement-calculator
+category: retirement
+tier: high
+description: Find out how much you need to save for retirement and whether you're on track. Plan your savings goal and sustainable withdrawal strategy.
+primaryKeyword: retirement calculator
+secondaryKeywords:
+  - retirement savings calculator
+  - how much do I need to retire calculator
+  - retirement age calculator
+faqs:
+  - question: How much do I need saved to retire comfortably?
+    answer: "The most common rule of thumb is to aim for 10–12 times your annual pre-retirement income saved by age 67. Another popular guideline is the 25x rule: multiply your desired annual retirement spending by 25 (based on the 4% withdrawal rule). For example, if you need $50,000 per year in retirement, you'd need $1.25 million saved. Your actual number depends on your lifestyle, healthcare costs, Social Security benefits, and life expectancy."
+  - question: What's the 4% withdrawal rule?
+    answer: The 4% rule is a retirement spending guideline developed from the "Trinity Study." It suggests that withdrawing 4% of your retirement portfolio in the first year, then adjusting for inflation each subsequent year, should make your savings last at least 30 years. For a $1 million portfolio, that's $40,000 in the first year. The rule is a guideline, not a guarantee — many retirees adjust based on market conditions and their actual spending needs.
+  - question: How does inflation affect my retirement savings?
+    answer: Inflation is one of the biggest threats to retirement security. At 3% average inflation, the purchasing power of your savings is cut in half every 24 years. A $1 million nest egg today might feel like $500,000 in 24 years. That's why most retirement calculators show both nominal (raw) and real (inflation-adjusted) values, and why retirees typically need to keep some growth-oriented investments in their portfolio even after retirement.
+  - question: When can I afford to retire?
+    answer: You can afford to retire when your savings, combined with Social Security, pensions, and other income sources, can support your desired lifestyle for your expected lifespan. A common target is having 80% of your pre-retirement income available annually. Enter your savings, contribution rate, expected returns, and desired retirement age into this calculator to see if you're on track — and what adjustments you might need to make.
+---
+
+A **retirement calculator** is your most important long-term financial planning tool. It answers the fundamental question: "How much do I need to save, and am I on track?" By projecting your savings growth through your working years and estimating how long that money will last in retirement, this calculator gives you a clear roadmap for achieving financial independence.
+
+## How to Use This Calculator
+
+Enter your current age, desired retirement age, current retirement savings, annual contribution amount, and expected annual return. Also enter how much you expect to spend annually in retirement and your estimated life expectancy. The calculator will show whether you're on track, how much you'll have at retirement, and how long that money will last. Adjust any input to see how changes impact your retirement readiness.
+
+## How It's Calculated
+
+This is a two-part calculation:
+
+**1. Accumulation phase:** Same future value formula for growth from now until retirement:
+FV_at_retirement = Current_Savings × (1+r/n)^(n×t) + PMT × [((1+r/n)^(n×t) −1)/(r/n)]
+
+**2. Sustainability check** using the 4% rule (or a configurable safe withdrawal rate):
+Sustainable Annual Income = FV_at_retirement × safe_withdrawal_rate (default 4%)
+
+The number of years savings will last is calculated using the withdrawal formula, accounting for continued growth during retirement. If the withdrawal rate is less than the return rate, the portfolio can theoretically last indefinitely.
