@@ -1,0 +1,54 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import FAQBlock from '@/components/calculators/FAQBlock.astro'
+import RelatedCalculators from '@/components/calculators/RelatedCalculators.astro'
+import { getToolBySlug, getCategoryBySlug, getRelatedTools } from '@/data/tools'
+import { getCollection } from 'astro:content'
+import { LoanPayoffCalculator } from '@/components/calculators/loan-payoff-calculator/index.tsx'
+
+const tool = getToolBySlug('loan-payoff-calculator')!
+const category = getCategoryBySlug(tool.category)!
+const related = getRelatedTools(tool)
+const [entry] = await getCollection('tools', ({ id }) => id === 'loan-payoff-calculator')
+const { data } = entry
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Calculators', url: '/calculators/' },
+  { name: category.name, url: `/calculators/${category.slug}/` },
+  { name: tool.name, url: '' },
+]
+---
+
+<Layout title={`Loan Payoff Calculator - Pay Off Your Loan Faster | FinCalc Pro`} description={tool.description} breadcrumbs={breadcrumbs} faq={data.faqs} toolName={tool.name} toolDescription={tool.description}>
+  <article>
+    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{tool.name}</h1>
+
+    <p class="text-muted-foreground mb-8">
+      A <strong>loan payoff calculator</strong> shows you how extra payments can shorten your loan term and save thousands in interest. Whether it's a mortgage, auto loan, student loan, or personal loan, see the impact of paying more each month.
+    </p>
+
+    <div class="my-8" id="calculator">
+      <LoanPayoffCalculator client:load />
+    </div>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Enter your current loan balance, interest rate, and remaining term. Then set an extra monthly payment amount. The calculator compares your original payoff schedule against the accelerated one, showing how many months you'll save and how much interest you'll avoid paying.</p>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>This calculator runs an iterative month-by-month simulation. In each period, the extra payment is applied directly to the principal:</p>
+        <p class="font-mono text-sm bg-muted p-3 rounded">Remaining Balance = Previous Balance − Principal Paid − Extra Payment</p>
+        <p>The simulation stops when the balance reaches zero. Interest saved = Original total interest − New total interest. The earlier you start making extra payments, the greater the savings since you're reducing the principal that future interest is calculated on.</p>
+      </div>
+    </section>
+
+    {data.faqs && <FAQBlock faqs={data.faqs} />}
+
+    <RelatedCalculators currentSlug={tool.slug} category={tool.category} />
+  </article>
+</Layout>

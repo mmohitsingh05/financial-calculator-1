@@ -1,0 +1,54 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import FAQBlock from '@/components/calculators/FAQBlock.astro'
+import RelatedCalculators from '@/components/calculators/RelatedCalculators.astro'
+import { getToolBySlug, getCategoryBySlug, getRelatedTools } from '@/data/tools'
+import { getCollection } from 'astro:content'
+import { NetWorthCalculator } from '@/components/calculators/net-worth-calculator/index.tsx'
+
+const tool = getToolBySlug('net-worth-calculator')!
+const category = getCategoryBySlug(tool.category)!
+const related = getRelatedTools(tool)
+const [entry] = await getCollection('tools', ({ id }) => id === 'net-worth-calculator')
+const { data } = entry
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Calculators', url: '/calculators/' },
+  { name: category.name, url: `/calculators/${category.slug}/` },
+  { name: tool.name, url: '' },
+]
+---
+
+<Layout title="Net Worth Calculator - Track Your Financial Health | FinCalc Pro" description={tool.description} breadcrumbs={breadcrumbs} faq={data.faqs} toolName={tool.name} toolDescription={tool.description}>
+  <article>
+    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{tool.name}</h1>
+
+    <p class="text-muted-foreground mb-8">
+      A <strong>net worth calculator</strong> gives you the most important snapshot of your financial health — what you own minus what you owe. Track your net worth over time to see real financial progress and identify areas for improvement.
+    </p>
+
+    <div class="my-8" id="calculator">
+      <NetWorthCalculator client:load />
+    </div>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Enter all your assets in the first section: cash and savings, investments, retirement accounts, home value, vehicle value, and other assets. Then enter all your liabilities: mortgage balance, auto loans, student loans, credit card debt, personal loans, and other debt. Click Calculate to see your total assets, total liabilities, and net worth.</p>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Net worth is the simplest and most powerful measure of financial health:</p>
+        <p class="font-mono text-sm bg-muted p-3 rounded">Net Worth = Total Assets − Total Liabilities</p>
+        <p>Assets include cash, investments, retirement accounts, real estate, vehicles, and other property. Liabilities include mortgages, auto loans, student loans, credit card balances, personal loans, and other debts. A positive net worth means you own more than you owe.</p>
+      </div>
+    </section>
+
+    {data.faqs && <FAQBlock faqs={data.faqs} />}
+
+    <RelatedCalculators currentSlug={tool.slug} category={tool.category} />
+  </article>
+</Layout>

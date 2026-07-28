@@ -1,0 +1,54 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import FAQBlock from '@/components/calculators/FAQBlock.astro'
+import RelatedCalculators from '@/components/calculators/RelatedCalculators.astro'
+import { getToolBySlug, getCategoryBySlug, getRelatedTools } from '@/data/tools'
+import { getEntry } from 'astro:content'
+import { SimpleInterestCalculator } from '@/components/calculators/simple-interest-calculator/index.tsx'
+
+const tool = getToolBySlug('simple-interest-calculator')!
+const category = getCategoryBySlug(tool.category)!
+const related = getRelatedTools(tool)
+const entry = await getEntry('tools', 'simple-interest-calculator')
+const { data } = entry!
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Calculators', url: '/calculators/' },
+  { name: category.name, url: `/calculators/${category.slug}/` },
+  { name: tool.name, url: '' },
+]
+---
+
+<Layout title="Simple Interest Calculator - Easy Interest Calculation | FinCalc Pro" description={tool.description} breadcrumbs={breadcrumbs} faq={data.faqs} toolName={tool.name} toolDescription={tool.description}>
+  <article>
+    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{tool.name}</h1>
+
+    <p class="text-muted-foreground mb-8">
+      A <strong>simple interest calculator</strong> helps you quickly determine the interest cost or earnings on any loan or investment where interest is calculated only on the principal. Simple interest is commonly used for short-term loans and certain bonds.
+    </p>
+
+    <div class="my-8" id="calculator">
+      <SimpleInterestCalculator client:load />
+    </div>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Enter the principal amount (the initial sum of money), the annual interest rate as a percentage, and the time period in years. The calculator will instantly show the total interest earned or owed, and the total amount (principal plus interest). You can adjust any input to see how changes affect the outcome.</p>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Simple interest uses a straightforward formula:</p>
+        <p class="font-mono text-sm bg-muted p-3 rounded">Interest = P × r × t</p>
+        <p>Where P is the principal amount, r is the annual interest rate expressed as a decimal (e.g., 5% = 0.05), and t is the time in years. Unlike compound interest, there is no "interest on interest" effect — each period's interest is based solely on the original principal.</p>
+      </div>
+    </section>
+
+    {data.faqs && <FAQBlock faqs={data.faqs} />}
+
+    <RelatedCalculators currentSlug={tool.slug} category={tool.category} />
+  </article>
+</Layout>

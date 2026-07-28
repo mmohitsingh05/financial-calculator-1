@@ -1,0 +1,54 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import FAQBlock from '@/components/calculators/FAQBlock.astro'
+import RelatedCalculators from '@/components/calculators/RelatedCalculators.astro'
+import { getToolBySlug, getCategoryBySlug, getRelatedTools } from '@/data/tools'
+import { getCollection } from 'astro:content'
+import { DebtToIncomeCalculator } from '@/components/calculators/debt-to-income-calculator/index.tsx'
+
+const tool = getToolBySlug('debt-to-income-calculator')!
+const category = getCategoryBySlug(tool.category)!
+const related = getRelatedTools(tool)
+const [entry] = await getCollection('tools', ({ id }) => id === 'debt-to-income-calculator')
+const { data } = entry
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Calculators', url: '/calculators/' },
+  { name: category.name, url: `/calculators/${category.slug}/` },
+  { name: tool.name, url: '' },
+]
+---
+
+<Layout title={`Debt-to-Income Ratio Calculator - DTI Calculator | FinCalc Pro`} description={tool.description} breadcrumbs={breadcrumbs} faq={data.faqs} toolName={tool.name} toolDescription={tool.description}>
+  <article>
+    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{tool.name}</h1>
+
+    <p class="text-muted-foreground mb-8">
+      A <strong>debt to income ratio calculator</strong> helps you understand your borrowing power. Your DTI is one of the most important factors lenders evaluate when approving mortgages and other loans. Know your front-end and back-end DTI before you apply.
+    </p>
+
+    <div class="my-8" id="calculator">
+      <DebtToIncomeCalculator client:load />
+    </div>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Enter your gross monthly income (before taxes), your monthly housing payment, and your other monthly debt payments. The calculator instantly shows your front-end DTI (housing only) and back-end DTI (total debt) along with color-coded status indicators based on standard lender guidelines.</p>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Two simple ratios are computed:</p>
+        <p class="font-mono text-sm bg-muted p-3 rounded">Front-end DTI = (Housing Payment / Gross Income) × 100<br />Back-end DTI = (Total Debt Payments / Gross Income) × 100</p>
+        <p>Lender benchmarks: front-end ≤ 28% is ideal, back-end ≤ 36% is ideal. Back-end up to 43% may be acceptable for some loan programs. Housing payment includes principal, interest, taxes, insurance, PMI, and HOA dues.</p>
+      </div>
+    </section>
+
+    {data.faqs && <FAQBlock faqs={data.faqs} />}
+
+    <RelatedCalculators currentSlug={tool.slug} category={tool.category} />
+  </article>
+</Layout>

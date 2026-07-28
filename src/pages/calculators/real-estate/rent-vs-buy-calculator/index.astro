@@ -1,0 +1,55 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import FAQBlock from '@/components/calculators/FAQBlock.astro'
+import RelatedCalculators from '@/components/calculators/RelatedCalculators.astro'
+import { getToolBySlug, getCategoryBySlug, getRelatedTools } from '@/data/tools'
+import { getCollection } from 'astro:content'
+import { RentVsBuyCalculator } from '@/components/calculators/rent-vs-buy-calculator/index.tsx'
+
+const tool = getToolBySlug('rent-vs-buy-calculator')!
+const category = getCategoryBySlug(tool.category)!
+const related = getRelatedTools(tool)
+const [entry] = await getCollection('tools', ({ id }) => id === 'rent-vs-buy-calculator')
+const { data } = entry
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Calculators', url: '/calculators/' },
+  { name: category.name, url: `/calculators/${category.slug}/` },
+  { name: tool.name, url: '' },
+]
+---
+
+<Layout title="Rent vs Buy Calculator - Should You Rent or Buy? | FinCalc Pro" description={tool.description} breadcrumbs={breadcrumbs} faq={data.faqs} toolName={tool.name} toolDescription={tool.description}>
+  <article>
+    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{tool.name}</h1>
+
+    <p class="text-muted-foreground mb-8">
+      A <strong>rent vs buy calculator</strong> helps you make one of the biggest financial decisions of your life with data, not emotion. Compare the true total cost of each path over your expected time horizon, including opportunity cost and equity buildup.
+    </p>
+
+    <div class="my-8" id="calculator">
+      <RentVsBuyCalculator client:load />
+    </div>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>Enter your monthly rent, expected annual rent increase, the home price you're considering, your down payment percentage, mortgage rate, and loan term. Add estimates for property taxes, insurance, maintenance, closing costs, appreciation, and your expected holding period. Click Calculate to see the total cost of each path and which is better for your situation.</p>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
+      <div class="prose prose-sm max-w-none text-muted-foreground">
+        <p>The calculator compares total costs for each path:</p>
+        <p class="font-mono text-sm bg-muted p-3 rounded">Cost of Renting = Total rent payments + Opportunity cost of down payment</p>
+        <p class="font-mono text-sm bg-muted p-3 rounded">Cost of Buying = Total mortgage payments + Taxes + Insurance + Maintenance + Closing costs − Appreciation − Equity − Sale proceeds</p>
+        <p>The break-even year is the point where the cumulative cost of buying becomes less than the cumulative cost of renting, factoring in all costs including the opportunity cost of the down payment.</p>
+      </div>
+    </section>
+
+    {data.faqs && <FAQBlock faqs={data.faqs} />}
+
+    <RelatedCalculators currentSlug={tool.slug} category={tool.category} />
+  </article>
+</Layout>
