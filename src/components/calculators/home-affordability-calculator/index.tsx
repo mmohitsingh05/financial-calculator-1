@@ -4,13 +4,13 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'annualIncome', label: 'Annual Household Income', type: 'currency', defaultValue: 85000, min: 0, max: 100000000 },
-  { key: 'monthlyDebts', label: 'Monthly Debt Payments', type: 'currency', defaultValue: 500, min: 0, max: 1000000 },
-  { key: 'downPayment', label: 'Down Payment', type: 'currency', defaultValue: 60000, min: 0, max: 100000000 },
-  { key: 'interestRate', label: 'Interest Rate', type: 'percent', defaultValue: 6.5, min: 0, max: 20, step: 0.125 },
-  { key: 'loanTerm', label: 'Loan Term', type: 'number', defaultValue: 30, min: 1, max: 40, suffix: 'years' },
-  { key: 'propertyTaxRate', label: 'Annual Property Tax Rate', type: 'percent', defaultValue: 1.2, min: 0, max: 5, step: 0.1 },
-  { key: 'annualInsurance', label: 'Annual Insurance', type: 'currency', defaultValue: 1200, min: 0, max: 50000 },
+  { key: 'annualIncome', label: 'Annual Household Income', type: 'currency', defaultValue: '', min: 0, max: 100000000 },
+  { key: 'monthlyDebts', label: 'Monthly Debt Payments', type: 'currency', defaultValue: '', min: 0, max: 1000000 },
+  { key: 'downPayment', label: 'Down Payment', type: 'currency', defaultValue: '', min: 0, max: 100000000 },
+  { key: 'interestRate', label: 'Interest Rate', type: 'percent', defaultValue: '', min: 0, max: 20, step: 0.125 },
+  { key: 'loanTerm', label: 'Loan Term', type: 'number', defaultValue: '', min: 1, max: 40, suffix: 'years' },
+  { key: 'propertyTaxRate', label: 'Annual Property Tax Rate', type: 'percent', defaultValue: '', min: 0, max: 5, step: 0.1 },
+  { key: 'annualInsurance', label: 'Annual Insurance', type: 'currency', defaultValue: '', min: 0, max: 50000 },
 ]
 
 interface AffordResult {
@@ -91,7 +91,7 @@ export function HomeAffordabilityCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Affordability Estimate</h3>

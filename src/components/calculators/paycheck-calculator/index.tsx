@@ -6,12 +6,12 @@ import ficaRates from '@/data/ficaRates2026.json'
 import { taxYear2026 } from '@/data/taxBrackets2026'
 
 const fields: FieldDefinition[] = [
-  { key: 'annualSalary', label: 'Annual Salary', type: 'currency', defaultValue: 75000, min: 0, max: 10000000 },
-  { key: 'payPeriods', label: 'Pay Periods per Year', type: 'number', defaultValue: 26, min: 12, max: 52, suffix: 'periods' },
-  { key: 'stateTaxRate', label: 'State Tax Rate', type: 'percent', defaultValue: 5, min: 0, max: 15 },
-  { key: 'contributionPercent', label: '401(k) Contribution', type: 'percent', defaultValue: 6, min: 0, max: 100 },
-  { key: 'healthInsurance', label: 'Health Insurance per Period', type: 'currency', defaultValue: 150, min: 0, max: 10000 },
-  { key: 'otherDeductions', label: 'Other Deductions per Period', type: 'currency', defaultValue: 50, min: 0, max: 10000 },
+  { key: 'annualSalary', label: 'Annual Salary', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'payPeriods', label: 'Pay Periods per Year', type: 'number', defaultValue: '', min: 12, max: 52, suffix: 'periods' },
+  { key: 'stateTaxRate', label: 'State Tax Rate', type: 'percent', defaultValue: '', min: 0, max: 15 },
+  { key: 'contributionPercent', label: '401(k) Contribution', type: 'percent', defaultValue: '', min: 0, max: 100 },
+  { key: 'healthInsurance', label: 'Health Insurance per Period', type: 'currency', defaultValue: '', min: 0, max: 10000 },
+  { key: 'otherDeductions', label: 'Other Deductions per Period', type: 'currency', defaultValue: '', min: 0, max: 10000 },
 ]
 
 interface PaycheckResult {
@@ -74,7 +74,7 @@ export function PaycheckCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Pay Period Breakdown</h3>

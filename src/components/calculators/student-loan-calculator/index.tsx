@@ -19,10 +19,10 @@ function computePayoffMonths(principal: number, annualRate: number, monthlyPayme
 }
 
 const fields: FieldDefinition[] = [
-  { key: 'loanBalance', label: 'Total Loan Balance', type: 'currency', defaultValue: 35000, min: 1000, max: 500000 },
-  { key: 'rate', label: 'Interest Rate', type: 'percent', defaultValue: 5.5, min: 0, max: 20, step: 0.125 },
-  { key: 'loanTerm', label: 'Loan Term', type: 'number', defaultValue: 10, min: 1, max: 30, suffix: 'years' },
-  { key: 'monthlyPayment', label: 'Fixed Monthly Payment', type: 'currency', defaultValue: 380, min: 50, max: 10000 },
+  { key: 'loanBalance', label: 'Total Loan Balance', type: 'currency', defaultValue: '', min: 1000, max: 500000 },
+  { key: 'rate', label: 'Interest Rate', type: 'percent', defaultValue: '', min: 0, max: 20, step: 0.125 },
+  { key: 'loanTerm', label: 'Loan Term', type: 'number', defaultValue: '', min: 1, max: 30, suffix: 'years' },
+  { key: 'monthlyPayment', label: 'Fixed Monthly Payment', type: 'currency', defaultValue: '', min: 50, max: 10000 },
 ]
 
 export function StudentLoanCalculator() {
@@ -64,7 +64,7 @@ export function StudentLoanCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset} calculateLabel="Calculate Payment">
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset} calculateLabel="Calculate Payment">
       <p class="text-xs text-muted-foreground -mt-2 mb-2">The default monthly payment is the standard 10-year repayment amount.</p>
       {result && (
         <div class="mt-6 space-y-3">

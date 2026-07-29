@@ -1,51 +1,36 @@
 ---
-import Layout from '@/layouts/Layout.astro'
-import FAQBlock from '@/components/calculators/FAQBlock.astro'
-import RelatedCalculators from '@/components/calculators/RelatedCalculators.astro'
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro'
 import { getToolBySlug, getCategoryBySlug } from '@/data/tools'
-import { getCollection } from 'astro:content'
+import { getEntry } from 'astro:content'
 import { IncomeTaxCalculator } from '@/components/calculators/income-tax-calculator/index.tsx'
 
 const tool = getToolBySlug('income-tax-calculator')!
 const category = getCategoryBySlug(tool.category)!
-const [entry] = await getCollection('tools', ({ id }) => id === 'income-tax-calculator')
-const { data } = entry ?? { data: { faqs: [] } }
-const breadcrumbs = [
-  { name: 'Home', url: '/' },
-  { name: 'Calculators', url: '/calculators/' },
-  { name: category.name, url: `/calculators/${category.slug}/` },
-  { name: tool.name, url: '' },
-]
+const entry = await getEntry('tools', 'income-tax-calculator')
+const { data } = entry!
 ---
 
-<Layout title="Income Tax Calculator - Estimate Your Federal Taxes | FinCalc Pro" description={data.description} breadcrumbs={breadcrumbs} faq={data.faqs} toolName={tool.name} toolDescription={data.description}>
-  <article>
-    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{tool.name}</h1>
-
-    <p class="text-muted-foreground mb-8">
-      An <strong>income tax calculator</strong> helps you estimate your federal tax bill based on your income and filing status. Understand your effective and marginal tax rates and plan ahead for tax season.
-    </p>
-
-    <div class="my-8" id="calculator">
-      <IncomeTaxCalculator client:load />
-    </div>
-
-    <section class="mt-10">
-      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
-      <div class="prose prose-sm max-w-none text-muted-foreground">
-        <p>Enter your annual gross income and select your filing status. The calculator applies the 2026 standard deduction and progressive tax brackets to compute your taxable income, total federal tax, effective tax rate, and marginal tax rate.</p>
-      </div>
-    </section>
-
-    <section class="mt-10">
-      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
-      <div class="prose prose-sm max-w-none text-muted-foreground">
-        <p>Taxable income = gross income − standard deduction (based on filing status). Tax is computed using progressive brackets: each portion of income is taxed at its corresponding rate. The effective tax rate is total tax divided by gross income. The marginal rate is the bracket your last dollar of income falls into.</p>
-      </div>
-    </section>
-
-    {data.faqs && <FAQBlock faqs={data.faqs} />}
-
-    <RelatedCalculators currentSlug={tool.slug} category={tool.category} />
-  </article>
-</Layout>
+<CalculatorLayout
+  title="Income Tax Calculator - Estimate Your Federal Taxes | FinCalc Pro"
+  description={data.description}
+  toolName={tool.name}
+  category={tool.category}
+  categoryName={category.name}
+  toolDescription={data.description}
+  faqs={data.faqs}
+  relatedSlug={tool.slug}
+  taxYear="2026"
+>
+  <div slot="calculator">
+    <IncomeTaxCalculator client:load />
+  </div>
+  <p slot="intro" class="text-muted-foreground mb-8">
+    An <strong>income tax calculator</strong> helps you estimate your federal tax bill based on your income and filing status. Understand your effective and marginal tax rates and plan ahead for tax season.
+  </p>
+  <div slot="how-to-use">
+    <p>Enter your annual gross income and select your filing status. The calculator applies the 2026 standard deduction and progressive tax brackets to compute your taxable income, total federal tax, effective tax rate, and marginal tax rate.</p>
+  </div>
+  <div slot="formula">
+    <p>Taxable income = gross income − standard deduction (based on filing status). Tax is computed using progressive brackets: each portion of income is taxed at its corresponding rate. The effective tax rate is total tax divided by gross income. The marginal rate is the bracket your last dollar of income falls into.</p>
+  </div>
+</CalculatorLayout>

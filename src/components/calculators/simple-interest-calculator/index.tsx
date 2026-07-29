@@ -4,9 +4,9 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { calculateSimpleInterest, formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'principal', label: 'Principal', type: 'currency', defaultValue: 10000, min: 0, max: 10000000 },
-  { key: 'interestRate', label: 'Interest Rate', type: 'percent', defaultValue: 5, min: 0, max: 100, step: 0.1 },
-  { key: 'years', label: 'Time Period', type: 'number', defaultValue: 3, min: 1, max: 60, suffix: 'years' },
+  { key: 'principal', label: 'Principal', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'interestRate', label: 'Interest Rate', type: 'percent', defaultValue: '', min: 0, max: 100, step: 0.1 },
+  { key: 'years', label: 'Time Period', type: 'number', defaultValue: '', min: 1, max: 60, suffix: 'years' },
 ]
 
 export function SimpleInterestCalculator() {
@@ -36,7 +36,7 @@ export function SimpleInterestCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Results</h3>

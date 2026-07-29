@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { fileURLToPath } from 'url';
 
 import preact from '@astrojs/preact';
 import tailwindcss from '@tailwindcss/vite';
@@ -15,7 +16,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        '@': '/src'
+        '@': fileURLToPath(new URL('./src', import.meta.url))
       }
     }
   }

@@ -4,9 +4,9 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { estimateSocialSecurity, formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'estimatedBenefitAtFRA', label: 'Est. Benefit at FRA', type: 'currency', defaultValue: 1800, min: 0, max: 10000 },
-  { key: 'currentAge', label: 'Current Age', type: 'number', defaultValue: 35, min: 18, max: 80, suffix: 'years' },
-  { key: 'fullRetirementAge', label: 'Full Retirement Age', type: 'number', defaultValue: 67, min: 62, max: 70, suffix: 'years' },
+  { key: 'estimatedBenefitAtFRA', label: 'Est. Benefit at FRA', type: 'currency', defaultValue: '', min: 0, max: 10000 },
+  { key: 'currentAge', label: 'Current Age', type: 'number', defaultValue: '', min: 18, max: 80, suffix: 'years' },
+  { key: 'fullRetirementAge', label: 'Full Retirement Age', type: 'number', defaultValue: '', min: 62, max: 70, suffix: 'years' },
   { key: 'claimAge', label: 'Claim Age', type: 'range', defaultValue: 67, min: 62, max: 70, step: 1, suffix: 'years' },
 ]
 
@@ -40,7 +40,7 @@ export function SocialSecurityCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset} calculateLabel="Estimate Benefit">
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset} calculateLabel="Estimate Benefit">
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Results</h3>

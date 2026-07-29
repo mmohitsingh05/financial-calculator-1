@@ -5,11 +5,11 @@ import { calculateFutureValue, formatCurrency } from '@/lib/CalculatorEngine'
 import contributionLimits from '@/data/contributionLimits2026.json'
 
 const fields: FieldDefinition[] = [
-  { key: 'currentAge', label: 'Current Age', type: 'number', defaultValue: 30, min: 18, max: 80, suffix: 'years' },
-  { key: 'currentBalance', label: 'Current Balance', type: 'currency', defaultValue: 0, min: 0, max: 10000000 },
-  { key: 'annualContribution', label: 'Annual Contribution', type: 'currency', defaultValue: 7000, min: 0, max: 7000 },
-  { key: 'annualReturn', label: 'Annual Return', type: 'percent', defaultValue: 7, min: 0, max: 100, step: 0.1 },
-  { key: 'retirementAge', label: 'Retirement Age', type: 'number', defaultValue: 65, min: 30, max: 100, suffix: 'years' },
+  { key: 'currentAge', label: 'Current Age', type: 'number', defaultValue: '', min: 18, max: 80, suffix: 'years' },
+  { key: 'currentBalance', label: 'Current Balance', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'annualContribution', label: 'Annual Contribution', type: 'currency', defaultValue: '', min: 0, max: 7000 },
+  { key: 'annualReturn', label: 'Annual Return', type: 'percent', defaultValue: '', min: 0, max: 100, step: 0.1 },
+  { key: 'retirementAge', label: 'Retirement Age', type: 'number', defaultValue: '', min: 30, max: 100, suffix: 'years' },
 ]
 
 export function RothIRACalculator() {
@@ -45,7 +45,7 @@ export function RothIRACalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Results</h3>

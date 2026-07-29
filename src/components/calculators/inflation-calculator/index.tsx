@@ -4,9 +4,9 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { calculateInflation, formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'amount', label: 'Amount', type: 'currency', defaultValue: 1000, min: 1, max: 100000000 },
-  { key: 'inflationRate', label: 'Inflation Rate', type: 'percent', defaultValue: 3, min: 0, max: 50, step: 0.1 },
-  { key: 'years', label: 'Years', type: 'number', defaultValue: 10, min: 1, max: 100 },
+  { key: 'amount', label: 'Amount', type: 'currency', defaultValue: '', min: 1, max: 100000000 },
+  { key: 'inflationRate', label: 'Inflation Rate', type: 'percent', defaultValue: '', min: 0, max: 50, step: 0.1 },
+  { key: 'years', label: 'Years', type: 'number', defaultValue: '', min: 1, max: 100 },
 ]
 
 export function InflationCalculator() {
@@ -35,7 +35,7 @@ export function InflationCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Inflation Impact</h3>

@@ -1,42 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/homepage/HeroSection.astro';
+import PopularTools from '../components/homepage/PopularTools.astro';
+import FeaturesSection from '../components/homepage/FeaturesSection.astro';
+import CTASection from '../components/homepage/CTASection.astro';
 ---
 
-<Layout title="FinCalc Pro — Free Financial Calculators & Tools" description="Free U.S. financial calculators for mortgages, loans, retirement, investing, salary, and more. Fast, accurate, and mobile-friendly.">
-  <section class="max-w-7xl mx-auto px-4 py-16 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">
-      Free Financial Calculators
-    </h1>
-    <p class="text-lg text-muted-foreground max-w-2xl mx-auto mb-12">
-      Make smarter financial decisions with our free, accurate calculators for
-      mortgages, loans, retirement, investing, taxes, and more.
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
-      <div class="p-4 rounded-lg bg-card border border-border">
-        <h2 class="font-semibold text-card-foreground">Loan Calculators</h2>
-        <p class="text-sm text-muted-foreground">Mortgage, auto, personal, student loans & more</p>
-      </div>
-      <div class="p-4 rounded-lg bg-card border border-border">
-        <h2 class="font-semibold text-card-foreground">Investment Calculators</h2>
-        <p class="text-sm text-muted-foreground">Compound interest, CD, DCA, savings goals</p>
-      </div>
-      <div class="p-4 rounded-lg bg-card border border-border">
-        <h2 class="font-semibold text-card-foreground">Retirement Calculators</h2>
-        <p class="text-sm text-muted-foreground">401(k), Roth IRA, Social Security & more</p>
-      </div>
-      <div class="p-4 rounded-lg bg-card border border-border">
-        <h2 class="font-semibold text-card-foreground">Salary & Tax Calculators</h2>
-        <p class="text-sm text-muted-foreground">Paycheck, salary converter, income tax estimator</p>
-      </div>
-      <div class="p-4 rounded-lg bg-card border border-border">
-        <h2 class="font-semibold text-card-foreground">Real Estate Calculators</h2>
-        <p class="text-sm text-muted-foreground">Home affordability, rent vs. buy analysis</p>
-      </div>
-      <div class="p-4 rounded-lg bg-card border border-border">
-        <h2 class="font-semibold text-card-foreground">General Finance</h2>
-        <p class="text-sm text-muted-foreground">Net worth, inflation, ROI, debt payoff</p>
-      </div>
-    </div>
-  </section>
+<Layout
+  title="FinCalc Pro — Free Financial Calculators & Tools"
+  description="Free U.S. financial calculators for mortgages, loans, retirement, investing, salary, and more. Fast, accurate, and mobile-friendly — no sign-up required."
+>
+  <HeroSection />
+  <PopularTools />
+  <FeaturesSection />
+  <CTASection />
 </Layout>

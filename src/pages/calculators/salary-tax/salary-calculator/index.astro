@@ -1,51 +1,35 @@
 ---
-import Layout from '@/layouts/Layout.astro'
-import FAQBlock from '@/components/calculators/FAQBlock.astro'
-import RelatedCalculators from '@/components/calculators/RelatedCalculators.astro'
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro'
 import { getToolBySlug, getCategoryBySlug } from '@/data/tools'
-import { getCollection } from 'astro:content'
+import { getEntry } from 'astro:content'
 import { SalaryCalculator } from '@/components/calculators/salary-calculator/index.tsx'
 
 const tool = getToolBySlug('salary-calculator')!
 const category = getCategoryBySlug(tool.category)!
-const [entry] = await getCollection('tools', ({ id }) => id === 'salary-calculator')
-const { data } = entry ?? { data: { faqs: [] } }
-const breadcrumbs = [
-  { name: 'Home', url: '/' },
-  { name: 'Calculators', url: '/calculators/' },
-  { name: category.name, url: `/calculators/${category.slug}/` },
-  { name: tool.name, url: '' },
-]
+const entry = await getEntry('tools', 'salary-calculator')
+const { data } = entry!
 ---
 
-<Layout title="Salary Calculator - Convert Hourly to Annual Pay | FinCalc Pro" description={data.description} breadcrumbs={breadcrumbs} faq={data.faqs} toolName={tool.name} toolDescription={data.description}>
-  <article>
-    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{tool.name}</h1>
-
-    <p class="text-muted-foreground mb-8">
-      A <strong>salary calculator</strong> helps you convert between hourly, weekly, monthly, and annual pay. Whether you're comparing job offers or planning your budget, see your income in every format.
-    </p>
-
-    <div class="my-8" id="calculator">
-      <SalaryCalculator client:load />
-    </div>
-
-    <section class="mt-10">
-      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
-      <div class="prose prose-sm max-w-none text-muted-foreground">
-        <p>Enter your hourly rate, the hours you work per week, and the number of weeks worked per year. The calculator will instantly show your annual, monthly, biweekly, weekly, and daily salary equivalents.</p>
-      </div>
-    </section>
-
-    <section class="mt-10">
-      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
-      <div class="prose prose-sm max-w-none text-muted-foreground">
-        <p>Annual salary = hourly rate × hours per week × weeks per year. Monthly = annual / 12. Biweekly = annual / 26. Weekly = annual / 52. Daily = annual / (weeks per year × 5).</p>
-      </div>
-    </section>
-
-    {data.faqs && <FAQBlock faqs={data.faqs} />}
-
-    <RelatedCalculators currentSlug={tool.slug} category={tool.category} />
-  </article>
-</Layout>
+<CalculatorLayout
+  title="Salary Calculator - Convert Hourly to Annual Pay | FinCalc Pro"
+  description={data.description}
+  toolName={tool.name}
+  category={tool.category}
+  categoryName={category.name}
+  toolDescription={data.description}
+  faqs={data.faqs}
+  relatedSlug={tool.slug}
+>
+  <div slot="calculator">
+    <SalaryCalculator client:load />
+  </div>
+  <p slot="intro" class="text-muted-foreground mb-8">
+    A <strong>salary calculator</strong> helps you convert between hourly, weekly, monthly, and annual pay. Whether you're comparing job offers or planning your budget, see your income in every format.
+  </p>
+  <div slot="how-to-use">
+    <p>Enter your hourly rate, the hours you work per week, and the number of weeks worked per year. The calculator will instantly show your annual, monthly, biweekly, weekly, and daily salary equivalents.</p>
+  </div>
+  <div slot="formula">
+    <p>Annual salary = hourly rate × hours per week × weeks per year. Monthly = annual / 12. Biweekly = annual / 26. Weekly = annual / 52. Daily = annual / (weeks per year × 5).</p>
+  </div>
+</CalculatorLayout>

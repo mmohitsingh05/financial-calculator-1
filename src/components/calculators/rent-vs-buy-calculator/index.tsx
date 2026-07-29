@@ -4,20 +4,20 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { calculateRentVsBuy, formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'monthlyRent', label: 'Monthly Rent', type: 'currency', defaultValue: 1500, min: 100, max: 50000 },
-  { key: 'annualRentIncrease', label: 'Annual Rent Increase', type: 'percent', defaultValue: 3, min: 0, max: 20, step: 0.1 },
-  { key: 'homePrice', label: 'Home Price', type: 'currency', defaultValue: 350000, min: 10000, max: 10000000 },
-  { key: 'downPaymentPercent', label: 'Down Payment', type: 'percent', defaultValue: 20, min: 0, max: 100, step: 1 },
-  { key: 'mortgageRate', label: 'Mortgage Rate', type: 'percent', defaultValue: 6.5, min: 0, max: 20, step: 0.125 },
-  { key: 'loanTerm', label: 'Loan Term', type: 'number', defaultValue: 30, min: 1, max: 40, suffix: 'years' },
-  { key: 'annualTaxRate', label: 'Annual Property Tax Rate', type: 'percent', defaultValue: 1.2, min: 0, max: 10, step: 0.1 },
-  { key: 'annualInsurance', label: 'Annual Home Insurance', type: 'currency', defaultValue: 1200, min: 0, max: 50000 },
-  { key: 'annualMaintenancePercent', label: 'Annual Maintenance', type: 'percent', defaultValue: 1, min: 0, max: 10, step: 0.1 },
-  { key: 'closingCostsPercent', label: 'Closing Costs', type: 'percent', defaultValue: 3, min: 0, max: 10, step: 0.1 },
-  { key: 'annualAppreciation', label: 'Annual Appreciation', type: 'percent', defaultValue: 3, min: 0, max: 20, step: 0.1 },
-  { key: 'investmentReturn', label: 'Investment Return Rate', type: 'percent', defaultValue: 7, min: 0, max: 30, step: 0.1 },
-  { key: 'holdingYears', label: 'Holding Period', type: 'number', defaultValue: 7, min: 1, max: 50, suffix: 'years' },
-  { key: 'sellingCostPercent', label: 'Selling Costs', type: 'percent', defaultValue: 6, min: 0, max: 15, step: 0.1 },
+  { key: 'monthlyRent', label: 'Monthly Rent', type: 'currency', defaultValue: '', min: 100, max: 50000 },
+  { key: 'annualRentIncrease', label: 'Annual Rent Increase', type: 'percent', defaultValue: '', min: 0, max: 20, step: 0.1 },
+  { key: 'homePrice', label: 'Home Price', type: 'currency', defaultValue: '', min: 10000, max: 10000000 },
+  { key: 'downPaymentPercent', label: 'Down Payment', type: 'percent', defaultValue: '', min: 0, max: 100, step: 1 },
+  { key: 'mortgageRate', label: 'Mortgage Rate', type: 'percent', defaultValue: '', min: 0, max: 20, step: 0.125 },
+  { key: 'loanTerm', label: 'Loan Term', type: 'number', defaultValue: '', min: 1, max: 40, suffix: 'years' },
+  { key: 'annualTaxRate', label: 'Annual Property Tax Rate', type: 'percent', defaultValue: '', min: 0, max: 10, step: 0.1 },
+  { key: 'annualInsurance', label: 'Annual Home Insurance', type: 'currency', defaultValue: '', min: 0, max: 50000 },
+  { key: 'annualMaintenancePercent', label: 'Annual Maintenance', type: 'percent', defaultValue: '', min: 0, max: 10, step: 0.1 },
+  { key: 'closingCostsPercent', label: 'Closing Costs', type: 'percent', defaultValue: '', min: 0, max: 10, step: 0.1 },
+  { key: 'annualAppreciation', label: 'Annual Appreciation', type: 'percent', defaultValue: '', min: 0, max: 20, step: 0.1 },
+  { key: 'investmentReturn', label: 'Investment Return Rate', type: 'percent', defaultValue: '', min: 0, max: 30, step: 0.1 },
+  { key: 'holdingYears', label: 'Holding Period', type: 'number', defaultValue: '', min: 1, max: 50, suffix: 'years' },
+  { key: 'sellingCostPercent', label: 'Selling Costs', type: 'percent', defaultValue: '', min: 0, max: 15, step: 0.1 },
 ]
 
 export function RentVsBuyCalculator() {
@@ -61,7 +61,7 @@ export function RentVsBuyCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Rent vs. Buy Comparison</h3>

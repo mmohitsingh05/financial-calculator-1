@@ -1,12 +1,15 @@
 ---
+import type { Crumb } from '@/components/layout/Breadcrumbs.astro'
+
 export interface Props {
   breadcrumbs?: { name: string; url: string }[]
   faq?: { question: string; answer: string }[]
   toolName?: string
   toolDescription?: string
+  howToSteps?: { title: string; text: string }[]
 }
 
-const { breadcrumbs, faq, toolName, toolDescription } = Astro.props
+const { breadcrumbs, faq, toolName, toolDescription, howToSteps } = Astro.props
 const siteUrl = 'https://fincalcpro.com'
 ---
 
@@ -43,7 +46,7 @@ const siteUrl = 'https://fincalcpro.com'
 }
 
 {
-  toolName && (
+  toolName && !howToSteps && (
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
@@ -57,6 +60,31 @@ const siteUrl = 'https://fincalcpro.com'
         price: '0',
         priceCurrency: 'USD',
       },
+    })} />
+  )
+}
+
+{
+  toolName && howToSteps && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': ['SoftwareApplication', 'HowTo'],
+      name: toolName,
+      description: toolDescription || `${toolName} — Free online financial calculator`,
+      applicationCategory: 'FinanceApplication',
+      operatingSystem: 'All',
+      browserRequirements: 'Requires JavaScript',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+      step: howToSteps.map((s, i) => ({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: s.title,
+        text: s.text,
+      })),
     })} />
   )
 }

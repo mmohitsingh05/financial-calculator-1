@@ -5,9 +5,9 @@ import { solveAmortization, formatCurrency } from '@/lib/CalculatorEngine'
 import { AmortizationTable } from '@/components/calculators/AmortizationTable'
 
 const fields: FieldDefinition[] = [
-  { key: 'loanAmount', label: 'Loan Amount', type: 'currency', defaultValue: 250000, min: 1000, max: 10000000 },
-  { key: 'rate', label: 'Interest Rate', type: 'percent', defaultValue: 6.5, min: 0, max: 20, step: 0.125 },
-  { key: 'loanTerm', label: 'Loan Term', type: 'number', defaultValue: 30, min: 1, max: 40, suffix: 'years' },
+  { key: 'loanAmount', label: 'Loan Amount', type: 'currency', defaultValue: '', min: 1000, max: 10000000 },
+  { key: 'rate', label: 'Interest Rate', type: 'percent', defaultValue: '', min: 0, max: 20, step: 0.125 },
+  { key: 'loanTerm', label: 'Loan Term', type: 'number', defaultValue: '', min: 1, max: 40, suffix: 'years' },
 ]
 
 export function AmortizationCalculator() {
@@ -36,7 +36,7 @@ export function AmortizationCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Monthly Payment</h3>

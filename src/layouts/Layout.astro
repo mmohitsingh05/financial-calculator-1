@@ -14,9 +14,10 @@ export interface Props {
   faq?: { question: string; answer: string }[]
   toolName?: string
   toolDescription?: string
+  howToSteps?: { title: string; text: string }[]
 }
 
-const { title, description, canonical, breadcrumbs, faq, toolName, toolDescription } = Astro.props
+const { title, description, canonical, breadcrumbs, faq, toolName, toolDescription, howToSteps } = Astro.props
 const site = new URL(Astro.site?.toString() || 'https://fincalcpro.com')
 const canonicalUrl = canonical ? new URL(canonical, site).toString() : Astro.url.href
 ---
@@ -28,6 +29,16 @@ const canonicalUrl = canonical ? new URL(canonical, site).toString() : Astro.url
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <script is:inline>
+      (function() {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -46,13 +57,14 @@ const canonicalUrl = canonical ? new URL(canonical, site).toString() : Astro.url
       faq={faq}
       toolName={toolName}
       toolDescription={toolDescription}
+      howToSteps={howToSteps}
     />
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
 
     <main class="flex-1">
-      <div class="max-w-7xl mx-auto px-4 py-6">
+      <div class="max-w-7xl mx-auto px-4 py-6 animate-fade-in-up">
         {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
         <slot />
       </div>

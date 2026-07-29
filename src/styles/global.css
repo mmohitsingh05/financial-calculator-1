@@ -2,31 +2,36 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.98 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.55 0.15 159.36);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.13 0.01 260);
+  --card: oklch(0.992 0.003 260);
+  --card-foreground: oklch(0.13 0.01 260);
+  --popover: oklch(0.992 0.003 260);
+  --popover-foreground: oklch(0.13 0.01 260);
+  --primary: oklch(0.55 0.18 159.36);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.92 0.01 159.36);
-  --secondary-foreground: oklch(0.25 0 0);
-  --muted: oklch(0.95 0 0);
-  --muted-foreground: oklch(0.55 0 0);
-  --accent: oklch(0.92 0.01 159.36);
-  --accent-foreground: oklch(0.25 0 0);
+  --secondary: oklch(0.93 0.03 159.36);
+  --secondary-foreground: oklch(0.25 0.01 159.36);
+  --muted: oklch(0.955 0.005 260);
+  --muted-foreground: oklch(0.45 0.01 260);
+  --accent: oklch(0.6 0.18 159.36);
+  --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.6 0.2 25.72);
   --destructive-foreground: oklch(0.97 0 0);
-  --border: oklch(0.89 0 0);
-  --input: oklch(0.89 0 0);
-  --ring: oklch(0.55 0.15 159.36);
+  --border: oklch(0.86 0.01 260);
+  --input: oklch(0.93 0.005 260);
+  --ring: oklch(0.55 0.18 159.36 / 0.3);
   --radius: 0.5rem;
-  --chart-1: oklch(0.55 0.15 159.36);
-  --chart-2: oklch(0.46 0.13 159.36);
-  --chart-3: oklch(0.37 0.11 159.36);
-  --chart-4: oklch(0.28 0.09 159.36);
-  --chart-5: oklch(0.19 0.07 159.36);
+  --chart-1: oklch(0.55 0.18 159.36);
+  --chart-2: oklch(0.5 0.16 159.36);
+  --chart-3: oklch(0.45 0.14 159.36);
+  --chart-4: oklch(0.4 0.12 159.36);
+  --chart-5: oklch(0.35 0.1 159.36);
+  --shadow-xs: 0 1px 2px oklch(0 0 0 / 0.03);
+  --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.04), 0 1px 2px oklch(0 0 0 / 0.02);
+  --shadow-md: 0 4px 6px oklch(0 0 0 / 0.05), 0 2px 4px oklch(0 0 0 / 0.03);
+  --shadow-lg: 0 10px 15px oklch(0 0 0 / 0.06), 0 4px 6px oklch(0 0 0 / 0.03);
+  --shadow-xl: 0 20px 25px oklch(0 0 0 / 0.08), 0 8px 10px oklch(0 0 0 / 0.03);
 }
 
 .dark {
@@ -85,6 +90,11 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
 }
 
 @layer base {
@@ -94,4 +104,102 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
+  html {
+    scroll-behavior: smooth;
+  }
+  html, body {
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  ::selection {
+    background-color: oklch(0.55 0.18 159.36 / 0.2);
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html, body {
+      transition: none;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes slide-in-left {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out both;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease-out both;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out both;
+}
+
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+.stagger-8 { animation-delay: 0.4s; }

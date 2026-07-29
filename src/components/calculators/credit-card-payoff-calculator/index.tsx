@@ -4,10 +4,10 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { simulateCreditCardPayoff, formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'balance', label: 'Current Balance', type: 'currency', defaultValue: 5000, min: 0, max: 1000000 },
-  { key: 'apr', label: 'APR', type: 'percent', defaultValue: 22, min: 0, max: 100 },
-  { key: 'monthlyPayment', label: 'Your Monthly Payment', type: 'currency', defaultValue: 200, min: 0, max: 100000 },
-  { key: 'minPaymentPercent', label: 'Minimum Payment % of Balance', type: 'percent', defaultValue: 2, min: 0, max: 100 },
+  { key: 'balance', label: 'Current Balance', type: 'currency', defaultValue: '', min: 0, max: 1000000 },
+  { key: 'apr', label: 'APR', type: 'percent', defaultValue: '', min: 0, max: 100 },
+  { key: 'monthlyPayment', label: 'Your Monthly Payment', type: 'currency', defaultValue: '', min: 0, max: 100000 },
+  { key: 'minPaymentPercent', label: 'Minimum Payment % of Balance', type: 'percent', defaultValue: '', min: 0, max: 100 },
 ]
 
 interface PayoffResult {
@@ -65,7 +65,7 @@ export function CreditCardPayoffCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Payoff Comparison</h3>

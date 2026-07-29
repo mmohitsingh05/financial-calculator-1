@@ -1,0 +1,27 @@
+---
+export interface Props {
+  variant?: 'default' | 'interactive' | 'highlight' | 'muted'
+  padding?: 'sm' | 'md' | 'lg'
+}
+
+const { variant = 'default', padding = 'md' } = Astro.props
+
+const variants: Record<string, string> = {
+  default: 'bg-card border border-border/80 shadow-[--shadow-sm]',
+  interactive:
+    'bg-card border border-border/80 shadow-[--shadow-xs] hover:border-primary/25 hover:shadow-[--shadow-lg] hover:-translate-y-0.5 transition-all duration-300',
+  highlight:
+    'bg-gradient-to-br from-primary/[0.04] via-primary/[0.02] to-muted border border-primary/15 shadow-[--shadow-sm]',
+  muted: 'bg-muted/70 border border-border/70',
+}
+
+const paddings: Record<string, string> = {
+  sm: 'p-4',
+  md: 'p-5',
+  lg: 'p-6',
+}
+---
+
+<div class={`rounded-2xl ${variants[variant]} ${paddings[padding]}`}>
+  <slot />
+</div>

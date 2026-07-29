@@ -5,14 +5,14 @@ import { calculate401k, formatCurrency } from '@/lib/CalculatorEngine'
 import contributionLimits from '@/data/contributionLimits2026.json'
 
 const fields: FieldDefinition[] = [
-  { key: 'currentAge', label: 'Current Age', type: 'number', defaultValue: 30, min: 18, max: 80, suffix: 'years' },
-  { key: 'currentBalance', label: 'Current 401(k) Balance', type: 'currency', defaultValue: 25000, min: 0, max: 10000000 },
-  { key: 'annualSalary', label: 'Annual Salary', type: 'currency', defaultValue: 75000, min: 0, max: 10000000 },
-  { key: 'employeeContribution', label: 'Employee Contribution', type: 'percent', defaultValue: 10, min: 0, max: 100, step: 0.5 },
-  { key: 'employerMatchRate', label: 'Employer Match Rate', type: 'percent', defaultValue: 100, min: 0, max: 200, step: 1 },
-  { key: 'employerMatchCap', label: 'Employer Match Cap (% of salary)', type: 'percent', defaultValue: 6, min: 0, max: 100, step: 0.5 },
-  { key: 'annualReturn', label: 'Annual Return', type: 'percent', defaultValue: 7, min: 0, max: 100, step: 0.1 },
-  { key: 'retirementAge', label: 'Retirement Age', type: 'number', defaultValue: 65, min: 30, max: 100, suffix: 'years' },
+  { key: 'currentAge', label: 'Current Age', type: 'number', defaultValue: '', min: 18, max: 80, suffix: 'years' },
+  { key: 'currentBalance', label: 'Current 401(k) Balance', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'annualSalary', label: 'Annual Salary', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'employeeContribution', label: 'Employee Contribution', type: 'percent', defaultValue: '', min: 0, max: 100, step: 0.5 },
+  { key: 'employerMatchRate', label: 'Employer Match Rate', type: 'percent', defaultValue: '', min: 0, max: 200, step: 1 },
+  { key: 'employerMatchCap', label: 'Employer Match Cap (% of salary)', type: 'percent', defaultValue: '', min: 0, max: 100, step: 0.5 },
+  { key: 'annualReturn', label: 'Annual Return', type: 'percent', defaultValue: '', min: 0, max: 100, step: 0.1 },
+  { key: 'retirementAge', label: 'Retirement Age', type: 'number', defaultValue: '', min: 30, max: 100, suffix: 'years' },
 ]
 
 export function FourOneKCalculator() {
@@ -50,7 +50,7 @@ export function FourOneKCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset} calculateLabel="Project Savings">
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset} calculateLabel="Project Savings">
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Projected Savings at Retirement</h3>

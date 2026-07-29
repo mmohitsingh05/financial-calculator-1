@@ -14,9 +14,10 @@ export interface Props {
   toolDescription?: string
   faqs?: { question: string; answer: string }[]
   relatedSlug: string
+  taxYear?: string
 }
 
-const { title, description, canonical, toolName, category, categoryName, toolDescription, faqs, relatedSlug } = Astro.props
+const { title, description, canonical, toolName, category, categoryName, toolDescription, faqs, relatedSlug, taxYear } = Astro.props
 
 const breadcrumbs = [
   { name: 'Home', url: '/' },
@@ -24,6 +25,7 @@ const breadcrumbs = [
   { name: categoryName, url: `/calculators/${category}/` },
   { name: toolName, url: '' },
 ]
+const lastUpdated = taxYear || 'January 2026'
 ---
 
 <Layout
@@ -35,31 +37,44 @@ const breadcrumbs = [
   toolName={toolName}
   toolDescription={toolDescription}
 >
-  <article>
-    <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">{toolName}</h1>
-
-    <slot name="intro" />
-
-    <div class="my-8" id="calculator">
-      <slot name="calculator" />
+  <div class="lg:grid lg:grid-cols-5 lg:gap-8">
+    <div class="lg:col-span-2">
+      <div class="lg:sticky lg:top-20 mb-8 lg:mb-0" id="calculator">
+        <slot name="calculator" />
+      </div>
     </div>
+    <div class="lg:col-span-3">
+      <article>
+        <div class="flex items-center gap-3 mb-1">
+          <h1 class="text-3xl md:text-4xl font-bold text-foreground">{toolName}</h1>
+          <span class="shrink-0 inline-flex items-center gap-1 text-xs text-muted-foreground bg-muted/70 border border-border/60 px-2 py-0.5 rounded-full">
+            <svg class="size-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Updated {lastUpdated}
+          </span>
+        </div>
 
-    <section class="mt-10">
-      <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
-      <div class="prose prose-sm max-w-none text-muted-foreground">
-        <slot name="how-to-use" />
-      </div>
-    </section>
+        <slot name="intro" />
 
-    <section class="mt-10">
-      <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
-      <div class="prose prose-sm max-w-none text-muted-foreground">
-        <slot name="formula" />
-      </div>
-    </section>
+        <section class="mt-10">
+          <h2 class="text-xl font-semibold text-foreground mb-3">How to Use This Calculator</h2>
+          <div class="prose prose-sm max-w-none text-muted-foreground">
+            <slot name="how-to-use" />
+          </div>
+        </section>
 
-    {faqs && <FAQBlock faqs={faqs} />}
+        <section class="mt-10">
+          <h2 class="text-xl font-semibold text-foreground mb-3">How It's Calculated</h2>
+          <div class="prose prose-sm max-w-none text-muted-foreground">
+            <slot name="formula" />
+          </div>
+        </section>
 
-    <RelatedCalculators currentSlug={relatedSlug} category={category} />
-  </article>
+        {faqs && <FAQBlock faqs={faqs} />}
+
+        <RelatedCalculators currentSlug={relatedSlug} category={category} />
+      </article>
+    </div>
+  </div>
 </Layout>

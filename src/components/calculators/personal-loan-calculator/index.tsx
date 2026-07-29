@@ -4,10 +4,10 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { solveAmortization, percentToDecimal, formatCurrency, formatPercent } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'loanAmount', label: 'Loan Amount', type: 'currency', defaultValue: 10000, min: 100, max: 1000000 },
-  { key: 'interestRate', label: 'Interest Rate (APR)', type: 'percent', defaultValue: 9, min: 0, max: 36, step: 0.125 },
-  { key: 'termYears', label: 'Loan Term', type: 'number', defaultValue: 3, min: 1, max: 30, suffix: 'years' },
-  { key: 'originationFee', label: 'Origination Fee', type: 'currency', defaultValue: 0, min: 0, max: 100000 },
+  { key: 'loanAmount', label: 'Loan Amount', type: 'currency', defaultValue: '', min: 100, max: 1000000 },
+  { key: 'interestRate', label: 'Interest Rate (APR)', type: 'percent', defaultValue: '', min: 0, max: 36, step: 0.125 },
+  { key: 'termYears', label: 'Loan Term', type: 'number', defaultValue: '', min: 1, max: 30, suffix: 'years' },
+  { key: 'originationFee', label: 'Origination Fee', type: 'currency', defaultValue: '', min: 0, max: 100000 },
 ]
 
 function estimateEffectiveAPR(loanAmount: number, monthlyPayment: number, N: number, amountFinanced: number): number {
@@ -67,7 +67,7 @@ export function PersonalLoanCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Monthly Payment</h3>

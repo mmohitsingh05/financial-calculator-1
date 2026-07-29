@@ -1,0 +1,31 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { tools, categories } from '../../data/tools'
+import { CalculatorDirectory } from '../../components/calculators/CalculatorDirectory'
+---
+
+<Layout
+  title="All Financial Calculators – Browse 31 Free Tools | FinCalc Pro"
+  description="Browse all 31 free financial calculators. Mortgage, auto loan, retirement, investing, salary, tax, and debt calculators — all in one place."
+>
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <nav class="flex items-center gap-2 text-sm text-muted-foreground mb-8">
+      <a href="/" class="hover:text-foreground transition-colors">Home</a>
+      <span class="text-muted-foreground mx-1">/</span>
+      <span class="text-foreground font-medium">All Calculators</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-3">
+        All Financial Calculators
+      </h1>
+      <p class="text-muted-foreground max-w-3xl text-base leading-relaxed">
+        Choose from <strong>{tools.length} free calculators</strong> covering loans, investments, retirement,
+        salary &amp; taxes, real estate, and general finance. All calculators are
+        100% client-side — your data never leaves your browser.
+      </p>
+    </div>
+
+    <CalculatorDirectory client:load tools={tools} categories={categories} />
+  </div>
+</Layout>

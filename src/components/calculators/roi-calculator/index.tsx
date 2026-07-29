@@ -4,9 +4,9 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { calculateROI, formatCurrency, formatPercent } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'initialInvestment', label: 'Initial Investment', type: 'currency', defaultValue: 10000, min: 1, max: 100000000 },
-  { key: 'finalValue', label: 'Final Value', type: 'currency', defaultValue: 15000, min: 1, max: 100000000 },
-  { key: 'years', label: 'Investment Period', type: 'number', defaultValue: 5, min: 1, max: 100, suffix: 'years' },
+  { key: 'initialInvestment', label: 'Initial Investment', type: 'currency', defaultValue: '', min: 1, max: 100000000 },
+  { key: 'finalValue', label: 'Final Value', type: 'currency', defaultValue: '', min: 1, max: 100000000 },
+  { key: 'years', label: 'Investment Period', type: 'number', defaultValue: '', min: 1, max: 100, suffix: 'years' },
 ]
 
 export function ROICalculator() {
@@ -39,7 +39,7 @@ export function ROICalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Return on Investment</h3>

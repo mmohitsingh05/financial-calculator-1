@@ -4,10 +4,10 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { solveSavingsPayment, calculateFutureValue, formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'targetAmount', label: 'Target Amount', type: 'currency', defaultValue: 50000, min: 0, max: 100000000 },
-  { key: 'currentSavings', label: 'Current Savings', type: 'currency', defaultValue: 5000, min: 0, max: 10000000 },
-  { key: 'annualReturn', label: 'Annual Return', type: 'percent', defaultValue: 5, min: 0, max: 100, step: 0.1 },
-  { key: 'years', label: 'Years to Goal', type: 'number', defaultValue: 5, min: 1, max: 60, suffix: 'years' },
+  { key: 'targetAmount', label: 'Target Amount', type: 'currency', defaultValue: '', min: 0, max: 100000000 },
+  { key: 'currentSavings', label: 'Current Savings', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'annualReturn', label: 'Annual Return', type: 'percent', defaultValue: '', min: 0, max: 100, step: 0.1 },
+  { key: 'years', label: 'Years to Goal', type: 'number', defaultValue: '', min: 1, max: 60, suffix: 'years' },
 ]
 
 export function SavingsGoalCalculator() {
@@ -48,7 +48,7 @@ export function SavingsGoalCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Results</h3>

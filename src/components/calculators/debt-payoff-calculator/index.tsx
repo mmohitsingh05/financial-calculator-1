@@ -4,16 +4,16 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { simulateDebtPayoff, formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'debt1Balance', label: 'Debt 1 Balance', type: 'currency', defaultValue: 5000, min: 0, max: 10000000 },
-  { key: 'debt1Apr', label: 'Debt 1 APR', type: 'percent', defaultValue: 22, min: 0, max: 40, step: 0.1 },
-  { key: 'debt1MinPayment', label: 'Debt 1 Min Payment', type: 'currency', defaultValue: 100, min: 1, max: 1000000 },
-  { key: 'debt2Balance', label: 'Debt 2 Balance', type: 'currency', defaultValue: 10000, min: 0, max: 10000000 },
-  { key: 'debt2Apr', label: 'Debt 2 APR', type: 'percent', defaultValue: 9, min: 0, max: 40, step: 0.1 },
-  { key: 'debt2MinPayment', label: 'Debt 2 Min Payment', type: 'currency', defaultValue: 200, min: 1, max: 1000000 },
-  { key: 'debt3Balance', label: 'Debt 3 Balance', type: 'currency', defaultValue: 15000, min: 0, max: 10000000 },
-  { key: 'debt3Apr', label: 'Debt 3 APR', type: 'percent', defaultValue: 6, min: 0, max: 40, step: 0.1 },
-  { key: 'debt3MinPayment', label: 'Debt 3 Min Payment', type: 'currency', defaultValue: 300, min: 1, max: 1000000 },
-  { key: 'extraMonthly', label: 'Extra Monthly Payment', type: 'currency', defaultValue: 200, min: 0, max: 1000000 },
+  { key: 'debt1Balance', label: 'Debt 1 Balance', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'debt1Apr', label: 'Debt 1 APR', type: 'percent', defaultValue: '', min: 0, max: 40, step: 0.1 },
+  { key: 'debt1MinPayment', label: 'Debt 1 Min Payment', type: 'currency', defaultValue: '', min: 1, max: 1000000 },
+  { key: 'debt2Balance', label: 'Debt 2 Balance', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'debt2Apr', label: 'Debt 2 APR', type: 'percent', defaultValue: '', min: 0, max: 40, step: 0.1 },
+  { key: 'debt2MinPayment', label: 'Debt 2 Min Payment', type: 'currency', defaultValue: '', min: 1, max: 1000000 },
+  { key: 'debt3Balance', label: 'Debt 3 Balance', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'debt3Apr', label: 'Debt 3 APR', type: 'percent', defaultValue: '', min: 0, max: 40, step: 0.1 },
+  { key: 'debt3MinPayment', label: 'Debt 3 Min Payment', type: 'currency', defaultValue: '', min: 1, max: 1000000 },
+  { key: 'extraMonthly', label: 'Extra Monthly Payment', type: 'currency', defaultValue: '', min: 0, max: 1000000 },
 ]
 
 export function DebtPayoffCalculator() {
@@ -52,7 +52,7 @@ export function DebtPayoffCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-4">
           <h3 class="text-lg font-semibold text-foreground">Payoff Comparison</h3>

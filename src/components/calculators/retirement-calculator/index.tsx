@@ -4,13 +4,13 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { calculateFutureValue, calculateRetirementWithdrawal, formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'currentAge', label: 'Current Age', type: 'number', defaultValue: 35, min: 18, max: 80, suffix: 'years' },
-  { key: 'currentSavings', label: 'Current Retirement Savings', type: 'currency', defaultValue: 100000, min: 0, max: 100000000 },
-  { key: 'monthlyContribution', label: 'Monthly Contribution', type: 'currency', defaultValue: 1000, min: 0, max: 100000 },
-  { key: 'annualReturn', label: 'Annual Return', type: 'percent', defaultValue: 7, min: 0, max: 100, step: 0.1 },
-  { key: 'retirementAge', label: 'Retirement Age', type: 'number', defaultValue: 65, min: 30, max: 100, suffix: 'years' },
-  { key: 'annualSpending', label: 'Annual Spending in Retirement', type: 'currency', defaultValue: 50000, min: 0, max: 10000000 },
-  { key: 'safeWithdrawalRate', label: 'Safe Withdrawal Rate', type: 'percent', defaultValue: 4, min: 0, max: 20, step: 0.1 },
+  { key: 'currentAge', label: 'Current Age', type: 'number', defaultValue: '', min: 18, max: 80, suffix: 'years' },
+  { key: 'currentSavings', label: 'Current Retirement Savings', type: 'currency', defaultValue: '', min: 0, max: 100000000 },
+  { key: 'monthlyContribution', label: 'Monthly Contribution', type: 'currency', defaultValue: '', min: 0, max: 100000 },
+  { key: 'annualReturn', label: 'Annual Return', type: 'percent', defaultValue: '', min: 0, max: 100, step: 0.1 },
+  { key: 'retirementAge', label: 'Retirement Age', type: 'number', defaultValue: '', min: 30, max: 100, suffix: 'years' },
+  { key: 'annualSpending', label: 'Annual Spending in Retirement', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'safeWithdrawalRate', label: 'Safe Withdrawal Rate', type: 'percent', defaultValue: '', min: 0, max: 20, step: 0.1 },
 ]
 
 export function RetirementCalculator() {
@@ -56,7 +56,7 @@ export function RetirementCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset} calculateLabel="Project Retirement">
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset} calculateLabel="Project Retirement">
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Results</h3>

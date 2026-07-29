@@ -4,10 +4,10 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { calculateHourlyToSalary, convertSalary, formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'hourlyRate', label: 'Hourly Rate', type: 'currency', defaultValue: 25, min: 1, max: 500 },
-  { key: 'hoursPerWeek', label: 'Hours per Week', type: 'number', defaultValue: 40, min: 1, max: 80 },
-  { key: 'weeksPerYear', label: 'Weeks per Year', type: 'number', defaultValue: 52, min: 1, max: 52 },
-  { key: 'overtimeHours', label: 'Overtime Hours per Week', type: 'number', defaultValue: 0, min: 0, max: 40 },
+  { key: 'hourlyRate', label: 'Hourly Rate', type: 'currency', defaultValue: '', min: 1, max: 500 },
+  { key: 'hoursPerWeek', label: 'Hours per Week', type: 'number', defaultValue: '', min: 1, max: 80 },
+  { key: 'weeksPerYear', label: 'Weeks per Year', type: 'number', defaultValue: '', min: 1, max: 52 },
+  { key: 'overtimeHours', label: 'Overtime Hours per Week', type: 'number', defaultValue: '', min: 0, max: 40 },
 ]
 
 export function HourlyToSalaryCalculator() {
@@ -44,7 +44,7 @@ export function HourlyToSalaryCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Annual Salary</h3>

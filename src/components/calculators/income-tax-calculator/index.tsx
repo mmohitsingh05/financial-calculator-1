@@ -5,7 +5,7 @@ import { calculateFederalTax, formatCurrency, formatPercent } from '@/lib/Calcul
 import { taxYear2026 } from '@/data/taxBrackets2026'
 
 const fields: FieldDefinition[] = [
-  { key: 'grossIncome', label: 'Annual Gross Income', type: 'currency', defaultValue: 85000, min: 0, max: 100000000 },
+  { key: 'grossIncome', label: 'Annual Gross Income', type: 'currency', defaultValue: '', min: 0, max: 100000000 },
   {
     key: 'filingStatus', label: 'Filing Status', type: 'select', defaultValue: 'single',
     options: [
@@ -50,7 +50,7 @@ export function IncomeTaxCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Tax Estimate (2026)</h3>

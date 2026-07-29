@@ -4,10 +4,10 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { calculateFutureValue, formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'initialDeposit', label: 'Initial Deposit', type: 'currency', defaultValue: 10000, min: 0, max: 10000000 },
-  { key: 'monthlyContribution', label: 'Monthly Contribution', type: 'currency', defaultValue: 500, min: 0, max: 100000 },
-  { key: 'interestRate', label: 'Interest Rate', type: 'percent', defaultValue: 7, min: 0, max: 100, step: 0.1 },
-  { key: 'years', label: 'Time Horizon', type: 'number', defaultValue: 10, min: 1, max: 60, suffix: 'years' },
+  { key: 'initialDeposit', label: 'Initial Deposit', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'monthlyContribution', label: 'Monthly Contribution', type: 'currency', defaultValue: '', min: 0, max: 100000 },
+  { key: 'interestRate', label: 'Interest Rate', type: 'percent', defaultValue: '', min: 0, max: 100, step: 0.1 },
+  { key: 'years', label: 'Time Horizon', type: 'number', defaultValue: '', min: 1, max: 60, suffix: 'years' },
   { key: 'compoundFrequency', label: 'Compound Frequency', type: 'select', defaultValue: 12, options: [
     { label: 'Daily (365)', value: 365 },
     { label: 'Monthly (12)', value: 12 },
@@ -47,7 +47,7 @@ export function CompoundInterestCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Results</h3>

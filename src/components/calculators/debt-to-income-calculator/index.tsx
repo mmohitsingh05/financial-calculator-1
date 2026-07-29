@@ -4,9 +4,9 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { calculateDTI, formatPercent } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'grossMonthlyIncome', label: 'Gross Monthly Income', type: 'currency', defaultValue: 6000, min: 100, max: 1000000 },
-  { key: 'monthlyHousing', label: 'Monthly Housing Payment', type: 'currency', defaultValue: 1500, min: 0, max: 500000 },
-  { key: 'otherMonthlyDebts', label: 'Other Monthly Debts', type: 'currency', defaultValue: 500, min: 0, max: 500000 },
+  { key: 'grossMonthlyIncome', label: 'Gross Monthly Income', type: 'currency', defaultValue: '', min: 100, max: 1000000 },
+  { key: 'monthlyHousing', label: 'Monthly Housing Payment', type: 'currency', defaultValue: '', min: 0, max: 500000 },
+  { key: 'otherMonthlyDebts', label: 'Other Monthly Debts', type: 'currency', defaultValue: '', min: 0, max: 500000 },
 ]
 
 function frontEndStatus(ratio: number): { label: string; color: string } {
@@ -55,7 +55,7 @@ export function DebtToIncomeCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Your Debt-to-Income Ratios</h3>

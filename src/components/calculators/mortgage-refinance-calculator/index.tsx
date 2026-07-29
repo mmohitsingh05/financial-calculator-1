@@ -4,12 +4,12 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { solveAmortization, formatCurrency, formatNumber } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'currentBalance', label: 'Current Balance', type: 'currency', defaultValue: 300000, min: 1000, max: 10000000 },
-  { key: 'currentRate', label: 'Current Interest Rate', type: 'percent', defaultValue: 6.5, min: 0, max: 20, step: 0.125 },
-  { key: 'remainingYears', label: 'Remaining Years', type: 'number', defaultValue: 25, min: 1, max: 40, suffix: 'years' },
-  { key: 'newRate', label: 'New Interest Rate', type: 'percent', defaultValue: 5.5, min: 0, max: 20, step: 0.125 },
-  { key: 'newTermYears', label: 'New Loan Term', type: 'number', defaultValue: 30, min: 1, max: 40, suffix: 'years' },
-  { key: 'closingCosts', label: 'Closing Costs', type: 'currency', defaultValue: 5000, min: 0, max: 100000 },
+  { key: 'currentBalance', label: 'Current Balance', type: 'currency', defaultValue: '', min: 1000, max: 10000000 },
+  { key: 'currentRate', label: 'Current Interest Rate', type: 'percent', defaultValue: '', min: 0, max: 20, step: 0.125 },
+  { key: 'remainingYears', label: 'Remaining Years', type: 'number', defaultValue: '', min: 1, max: 40, suffix: 'years' },
+  { key: 'newRate', label: 'New Interest Rate', type: 'percent', defaultValue: '', min: 0, max: 20, step: 0.125 },
+  { key: 'newTermYears', label: 'New Loan Term', type: 'number', defaultValue: '', min: 1, max: 40, suffix: 'years' },
+  { key: 'closingCosts', label: 'Closing Costs', type: 'currency', defaultValue: '', min: 0, max: 100000 },
 ]
 
 export function MortgageRefinanceCalculator() {
@@ -53,7 +53,7 @@ export function MortgageRefinanceCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Payment Comparison</h3>

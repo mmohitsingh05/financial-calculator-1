@@ -4,10 +4,10 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { solveAmortization, percentToDecimal, formatCurrency, formatNumber } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'loanBalance', label: 'Loan Balance', type: 'currency', defaultValue: 15000, min: 100, max: 10000000 },
-  { key: 'interestRate', label: 'Interest Rate', type: 'percent', defaultValue: 6, min: 0, max: 36, step: 0.125 },
-  { key: 'remainingTermYears', label: 'Remaining Term', type: 'number', defaultValue: 5, min: 1, max: 40, suffix: 'years' },
-  { key: 'extraMonthlyPayment', label: 'Extra Monthly Payment', type: 'currency', defaultValue: 100, min: 0, max: 100000 },
+  { key: 'loanBalance', label: 'Loan Balance', type: 'currency', defaultValue: '', min: 100, max: 10000000 },
+  { key: 'interestRate', label: 'Interest Rate', type: 'percent', defaultValue: '', min: 0, max: 36, step: 0.125 },
+  { key: 'remainingTermYears', label: 'Remaining Term', type: 'number', defaultValue: '', min: 1, max: 40, suffix: 'years' },
+  { key: 'extraMonthlyPayment', label: 'Extra Monthly Payment', type: 'currency', defaultValue: '', min: 0, max: 100000 },
 ]
 
 function simulateExtraPayment(principal: number, annualRate: number, years: number, extraPayment: number) {
@@ -80,7 +80,7 @@ export function LoanPayoffCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset} calculateLabel="Calculate Payoff">
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset} calculateLabel="Calculate Payoff">
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Original Schedule</h3>

@@ -24,12 +24,22 @@ export function useCalculatorForm(fields: FieldDefinition[]) {
     initial[f.key] = f.defaultValue
   }
 
-  const [values, setValues] = useState<CalculatorFormState>(initial)
+  const [rawValues, setRawValues] = useState<CalculatorFormState>(initial)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [touched, setTouched] = useState<Record<string, boolean>>({})
 
+  const values: CalculatorFormState = {}
+  for (const [key, val] of Object.entries(rawValues)) {
+    values[key] = val === '' ? 0 : val
+  }
+
+  const displayValues: CalculatorFormState = {}
+  for (const [key, val] of Object.entries(rawValues)) {
+    displayValues[key] = val
+  }
+
   const setValue = useCallback((key: string, value: number | string) => {
-    setValues(prev => ({ ...prev, [key]: value }))
+    setRawValues(prev => ({ ...prev, [key]: value }))
     setErrors(prev => {
       const next = { ...prev }
       delete next[key]
@@ -67,7 +77,7 @@ export function useCalculatorForm(fields: FieldDefinition[]) {
     for (const f of fields) {
       init[f.key] = f.defaultValue
     }
-    setValues(init)
+    setRawValues(init)
     setErrors({})
     setTouched({})
   }, [fields])
@@ -84,6 +94,7 @@ export function useCalculatorForm(fields: FieldDefinition[]) {
 
   return {
     values,
+    displayValues,
     errors,
     touched,
     setValue,

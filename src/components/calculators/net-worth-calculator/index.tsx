@@ -4,18 +4,18 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { calculateNetWorth, formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'cashSavings', label: 'Cash & Savings', type: 'currency', defaultValue: 10000, min: 0, max: 10000000 },
-  { key: 'investments', label: 'Investments', type: 'currency', defaultValue: 50000, min: 0, max: 10000000 },
-  { key: 'retirementAccounts', label: 'Retirement Accounts', type: 'currency', defaultValue: 75000, min: 0, max: 10000000 },
-  { key: 'homeValue', label: 'Home Value', type: 'currency', defaultValue: 300000, min: 0, max: 10000000 },
-  { key: 'vehicleValue', label: 'Vehicle Value', type: 'currency', defaultValue: 25000, min: 0, max: 1000000 },
-  { key: 'otherAssets', label: 'Other Assets', type: 'currency', defaultValue: 5000, min: 0, max: 10000000 },
-  { key: 'mortgageBalance', label: 'Mortgage Balance', type: 'currency', defaultValue: 200000, min: 0, max: 10000000 },
-  { key: 'autoLoans', label: 'Auto Loans', type: 'currency', defaultValue: 15000, min: 0, max: 1000000 },
-  { key: 'studentLoans', label: 'Student Loans', type: 'currency', defaultValue: 20000, min: 0, max: 1000000 },
-  { key: 'creditCardDebt', label: 'Credit Card Debt', type: 'currency', defaultValue: 5000, min: 0, max: 1000000 },
-  { key: 'personalLoans', label: 'Personal Loans', type: 'currency', defaultValue: 0, min: 0, max: 1000000 },
-  { key: 'otherDebt', label: 'Other Debt', type: 'currency', defaultValue: 0, min: 0, max: 1000000 },
+  { key: 'cashSavings', label: 'Cash & Savings', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'investments', label: 'Investments', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'retirementAccounts', label: 'Retirement Accounts', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'homeValue', label: 'Home Value', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'vehicleValue', label: 'Vehicle Value', type: 'currency', defaultValue: '', min: 0, max: 1000000 },
+  { key: 'otherAssets', label: 'Other Assets', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'mortgageBalance', label: 'Mortgage Balance', type: 'currency', defaultValue: '', min: 0, max: 10000000 },
+  { key: 'autoLoans', label: 'Auto Loans', type: 'currency', defaultValue: '', min: 0, max: 1000000 },
+  { key: 'studentLoans', label: 'Student Loans', type: 'currency', defaultValue: '', min: 0, max: 1000000 },
+  { key: 'creditCardDebt', label: 'Credit Card Debt', type: 'currency', defaultValue: '', min: 0, max: 1000000 },
+  { key: 'personalLoans', label: 'Personal Loans', type: 'currency', defaultValue: '', min: 0, max: 1000000 },
+  { key: 'otherDebt', label: 'Other Debt', type: 'currency', defaultValue: '', min: 0, max: 1000000 },
 ]
 
 export function NetWorthCalculator() {
@@ -61,7 +61,7 @@ export function NetWorthCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Net Worth Summary</h3>

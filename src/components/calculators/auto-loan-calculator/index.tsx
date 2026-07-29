@@ -4,11 +4,11 @@ import { CalculatorForm, ResultsDisplay } from '@/components/calculators/Calcula
 import { solveAmortization, formatCurrency } from '@/lib/CalculatorEngine'
 
 const fields: FieldDefinition[] = [
-  { key: 'vehiclePrice', label: 'Vehicle Price', type: 'currency', defaultValue: 35000, min: 1000, max: 1000000 },
-  { key: 'downPayment', label: 'Down Payment', type: 'currency', defaultValue: 5000, min: 0, max: 500000 },
-  { key: 'tradeInValue', label: 'Trade-In Value', type: 'currency', defaultValue: 0, min: 0, max: 500000 },
-  { key: 'rate', label: 'Interest Rate', type: 'percent', defaultValue: 6.5, min: 0, max: 20, step: 0.125 },
-  { key: 'loanTerm', label: 'Loan Term', type: 'number', defaultValue: 60, min: 12, max: 84, suffix: 'months' },
+  { key: 'vehiclePrice', label: 'Vehicle Price', type: 'currency', defaultValue: '', min: 1000, max: 1000000 },
+  { key: 'downPayment', label: 'Down Payment', type: 'currency', defaultValue: '', min: 0, max: 500000 },
+  { key: 'tradeInValue', label: 'Trade-In Value', type: 'currency', defaultValue: '', min: 0, max: 500000 },
+  { key: 'rate', label: 'Interest Rate', type: 'percent', defaultValue: '', min: 0, max: 20, step: 0.125 },
+  { key: 'loanTerm', label: 'Loan Term', type: 'number', defaultValue: '', min: 12, max: 84, suffix: 'months' },
 ]
 
 export function AutoLoanCalculator() {
@@ -37,7 +37,7 @@ export function AutoLoanCalculator() {
   }
 
   return (
-    <CalculatorForm fields={fields} values={values} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
+    <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
           <h3 class="text-lg font-semibold text-foreground">Monthly Payment</h3>

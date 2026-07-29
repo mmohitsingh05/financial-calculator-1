@@ -1,0 +1,16 @@
+---
+export interface Props {
+  label: string
+  value: string
+  highlight?: boolean
+}
+
+const { label, value, highlight } = Astro.props
+---
+
+<div class={`p-4 rounded-xl ${highlight
+  ? 'bg-gradient-to-br from-primary/[0.04] via-primary/[0.02] to-muted border border-primary/15 shadow-[--shadow-sm]'
+  : 'bg-muted/70 border border-border/70'}`}>
+  <p class="text-xs text-muted-foreground mb-0.5">{label}</p>
+  <p class={`text-xl font-bold tabular-nums ${highlight ? 'text-primary' : 'text-foreground'}`}>{value}</p>
+</div>

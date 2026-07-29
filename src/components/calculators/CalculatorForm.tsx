@@ -1,121 +1,93 @@
 import { type FieldDefinition, type CalculatorFormState } from './useCalculatorForm'
+import { Input } from '@/components/ui/Input'
+import { Slider } from '@/components/ui/Slider'
+import { Select } from '@/components/ui/Select'
+import { ResultsCard } from '@/components/ui/ResultsCard'
+import { Button } from '@/components/ui/Button'
 
-interface NumberInputProps {
+function NumbersIcon() {
+  return (
+    <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+    </svg>
+  )
+}
+
+function NumberInput({ field, value, error: isError, touched: isTouched, onChange }: {
   field: FieldDefinition
   value: number | string
   error?: string
   touched?: boolean
   onChange: (key: string, value: number | string) => void
-}
-
-export function NumberInput({ field, value, error, touched: isTouched, onChange }: NumberInputProps) {
-  const showError = isTouched && error
+}) {
+  const prefix = field.type === 'currency' ? '$' : undefined
+  const suffix = field.type === 'percent' ? '%' : field.suffix
   return (
-    <div class="space-y-1.5">
-      <label class="block text-sm font-medium text-foreground" for={field.key}>
-        {field.label}
-      </label>
-      <div class="relative">
-        {field.type === 'currency' && (
-          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
-        )}
-        <input
-          id={field.key}
-          type="number"
-          value={value}
-          onInput={(e: any) => onChange(field.key, parseFloat(e.currentTarget.value) || 0)}
-          min={field.min}
-          max={field.max}
-          step={field.step ?? 'any'}
-          placeholder={field.placeholder}
-          class={`w-full rounded-lg border ${showError ? 'border-destructive' : 'border-input'} bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring ${field.type === 'currency' ? 'pl-7' : ''}`}
-        />
-        {field.suffix && (
-          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">{field.suffix}</span>
-        )}
-      </div>
-      {showError && <p class="text-xs text-destructive">{error}</p>}
-    </div>
+    <Input
+      label={field.label}
+      name={field.key}
+      type="number"
+      value={value}
+      onInput={(e: any) => onChange(field.key, parseFloat(e.currentTarget.value) || 0)}
+      min={field.min}
+      max={field.max}
+      step={field.step ?? 'any'}
+      placeholder={field.placeholder}
+      prefix={prefix}
+      suffix={suffix}
+      error={isError}
+      touched={isTouched}
+    />
   )
 }
 
-interface SliderInputProps {
+function SliderInput({ field, value, onChange }: {
   field: FieldDefinition
   value: number | string
   onChange: (key: string, value: number | string) => void
-}
-
-export function SliderInput({ field, value, onChange }: SliderInputProps) {
+}) {
   const numVal = typeof value === 'number' ? value : parseFloat(String(value)) || 0
   return (
-    <div class="space-y-1.5">
-      <div class="flex items-center justify-between">
-        <label class="block text-sm font-medium text-foreground" for={field.key}>
-          {field.label}
-        </label>
-        <span class="text-sm font-semibold text-primary">{field.suffix ? `${numVal}${field.suffix}` : numVal}</span>
-      </div>
-      <input
-        id={field.key}
-        type="range"
-        value={numVal}
-        onInput={(e: any) => onChange(field.key, parseFloat(e.currentTarget.value))}
-        min={field.min ?? 0}
-        max={field.max ?? 100}
-        step={field.step ?? 1}
-        class="w-full accent-primary"
-      />
-    </div>
+    <Slider
+      label={field.label}
+      name={field.key}
+      value={numVal}
+      onInput={(e: any) => onChange(field.key, parseFloat(e.currentTarget.value))}
+      min={field.min ?? 0}
+      max={field.max ?? 100}
+      step={field.step ?? 1}
+      displayValue={field.suffix ? `${numVal}${field.suffix}` : String(numVal)}
+      minLabel={field.min != null ? `${field.min}${field.suffix ?? ''}` : undefined}
+      maxLabel={field.max != null ? `${field.max}${field.suffix ?? ''}` : undefined}
+    />
   )
 }
 
-interface SelectInputProps {
+function SelectInput({ field, value, onChange }: {
   field: FieldDefinition
   value: number | string
   onChange: (key: string, value: number | string) => void
-}
-
-export function SelectInput({ field, value, onChange }: SelectInputProps) {
+}) {
   return (
-    <div class="space-y-1.5">
-      <label class="block text-sm font-medium text-foreground" for={field.key}>
-        {field.label}
-      </label>
-      <select
-        id={field.key}
-        value={value}
-        onChange={(e: any) => {
-          const val = e.currentTarget.value
-          onChange(field.key, isNaN(Number(val)) ? val : Number(val))
-        }}
-        class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-      >
-        {field.options?.map(opt => (
-          <option key={opt.value} value={opt.value}>{opt.label}</option>
-        ))}
-      </select>
-    </div>
+    <Select
+      label={field.label}
+      name={field.key}
+      value={value}
+      onChange={(e: any) => {
+        const val = e.currentTarget.value
+        onChange(field.key, isNaN(Number(val)) ? val : Number(val))
+      }}
+      options={field.options ?? []}
+    />
   )
 }
 
-interface ResultsDisplayProps {
-  label: string
-  value: string
-  highlight?: boolean
-}
-
-export function ResultsDisplay({ label, value, highlight }: ResultsDisplayProps) {
-  return (
-    <div class={`p-3 rounded-lg ${highlight ? 'bg-primary/10 border border-primary/20' : 'bg-muted'}`}>
-      <p class="text-xs text-muted-foreground">{label}</p>
-      <p class={`text-lg font-bold ${highlight ? 'text-primary' : 'text-foreground'}`}>{value}</p>
-    </div>
-  )
-}
+export { ResultsCard as ResultsDisplay }
 
 interface CalculatorFormProps {
   fields: FieldDefinition[]
   values: CalculatorFormState
+  displayValues?: CalculatorFormState
   errors: Record<string, string>
   touched: Record<string, boolean>
   onChange: (key: string, value: number | string) => void
@@ -128,6 +100,7 @@ interface CalculatorFormProps {
 export function CalculatorForm({
   fields,
   values,
+  displayValues,
   errors,
   touched: isTouched,
   onChange,
@@ -136,65 +109,71 @@ export function CalculatorForm({
   calculateLabel = 'Calculate',
   children,
 }: CalculatorFormProps) {
+  const display = displayValues || values
   const handleSubmit = (e: Event) => {
     e.preventDefault()
     onCalculate()
   }
 
   return (
-    <form onSubmit={handleSubmit} class="space-y-4">
-      {fields.map(field => {
-        if (field.type === 'select' && field.options) {
+    <form onSubmit={handleSubmit} class="bg-card border border-border/80 rounded-2xl shadow-[--shadow-sm] p-5 md:p-6 space-y-5">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="p-1.5 rounded-lg bg-primary/10 text-primary">
+          <NumbersIcon />
+        </span>
+        <h3 class="font-semibold text-foreground text-sm">Enter Your Details</h3>
+      </div>
+
+      <div class="space-y-4">
+        {fields.map(field => {
+          if (field.type === 'select' && field.options) {
+            return (
+              <SelectInput
+                key={field.key}
+                field={field}
+                value={display[field.key]}
+                onChange={onChange}
+              />
+            )
+          }
+          if (field.type === 'range') {
+            return (
+              <SliderInput
+                key={field.key}
+                field={field}
+                value={display[field.key]}
+                onChange={onChange}
+              />
+            )
+          }
           return (
-            <SelectInput
+            <NumberInput
               key={field.key}
               field={field}
-              value={values[field.key]}
+              value={display[field.key]}
+              error={errors[field.key]}
+              touched={isTouched[field.key]}
               onChange={onChange}
             />
           )
-        }
-        if (field.type === 'range') {
-          return (
-            <SliderInput
-              key={field.key}
-              field={field}
-              value={values[field.key]}
-              onChange={onChange}
-            />
-          )
-        }
-        return (
-          <NumberInput
-            key={field.key}
-            field={field}
-            value={values[field.key]}
-            error={errors[field.key]}
-            touched={isTouched[field.key]}
-            onChange={onChange}
-          />
-        )
-      })}
+        })}
+      </div>
 
       <div class="flex gap-3 pt-2">
-        <button
-          type="submit"
-          class="flex-1 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity cursor-pointer"
-        >
+        <Button type="submit" variant="primary" size="md" class="flex-1">
+          <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+          </svg>
           {calculateLabel}
-        </button>
+        </Button>
         {onReset && (
-          <button
-            type="button"
-            onClick={onReset}
-            class="px-4 py-2.5 rounded-lg border border-border text-muted-foreground text-sm hover:bg-muted transition-colors cursor-pointer"
-          >
+          <Button type="button" variant="outline" size="md" onClick={onReset}>
             Reset
-          </button>
+          </Button>
         )}
       </div>
 
-      {children}
+      {children && <div class="animate-scale-in">{children}</div>}
     </form>
   )
 }
