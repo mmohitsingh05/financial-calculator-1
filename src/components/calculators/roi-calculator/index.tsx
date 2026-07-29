@@ -42,7 +42,7 @@ export function ROICalculator() {
     <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
-          <h3 class="text-lg font-semibold text-foreground">Return on Investment</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground">Return on Investment</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <ResultsDisplay label="Total ROI" value={result.roi} highlight />
             <ResultsDisplay label="Annualized ROI (CAGR)" value={result.annualizedRoi} highlight />

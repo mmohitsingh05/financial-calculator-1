@@ -83,14 +83,14 @@ export function LoanPayoffCalculator() {
     <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset} calculateLabel="Calculate Payoff">
       {result && (
         <div class="mt-6 space-y-3">
-          <h3 class="text-lg font-semibold text-foreground">Original Schedule</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground">Original Schedule</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <ResultsDisplay label="Payoff Time" value={`${result.originalMonths} months`} />
             <ResultsDisplay label="Total Interest" value={result.originalInterest} />
           </div>
           {result.hasExtra && (
             <>
-              <h3 class="text-lg font-semibold text-foreground pt-3">With Extra Payments</h3>
+              <h3 class="text-base sm:text-lg font-semibold text-foreground pt-3">With Extra Payments</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <ResultsDisplay label="New Payoff Time" value={`${result.newMonths} months`} />
                 <ResultsDisplay label="New Total Interest" value={result.newTotalInterest} />

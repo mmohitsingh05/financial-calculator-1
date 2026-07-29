@@ -64,7 +64,7 @@ export function NetWorthCalculator() {
     <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
-          <h3 class="text-lg font-semibold text-foreground">Net Worth Summary</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground">Net Worth Summary</h3>
           <div class={`p-4 rounded-lg border ${result.isPositive ? 'bg-green-50 border-green-200 dark:bg-green-950/20 dark:border-green-800' : 'bg-red-50 border-red-200 dark:bg-red-950/20 dark:border-red-800'}`}>
             <ResultsDisplay label="Net Worth" value={result.netWorth} highlight />
           </div>

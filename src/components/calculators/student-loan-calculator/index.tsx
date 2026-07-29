@@ -68,10 +68,10 @@ export function StudentLoanCalculator() {
       <p class="text-xs text-muted-foreground -mt-2 mb-2">The default monthly payment is the standard 10-year repayment amount.</p>
       {result && (
         <div class="mt-6 space-y-3">
-          <h3 class="text-lg font-semibold text-foreground">Monthly Payment</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground">Monthly Payment</h3>
           <ResultsDisplay label="Your Fixed Monthly Payment" value={result.monthlyPayment} highlight />
           <ResultsDisplay label="Standard 10-Year Payment" value={result.standardPayment} />
-          <h3 class="text-lg font-semibold text-foreground pt-3">Loan Summary</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground pt-3">Loan Summary</h3>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <ResultsDisplay label="Total Interest Paid" value={result.totalInterest} />
             <ResultsDisplay label="Total of All Payments" value={result.totalPayment} />

@@ -64,7 +64,7 @@ export function RentVsBuyCalculator() {
     <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
-          <h3 class="text-lg font-semibold text-foreground">Rent vs. Buy Comparison</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground">Rent vs. Buy Comparison</h3>
           <div class={`p-4 rounded-lg border ${result.buyBetter ? 'bg-green-50 border-green-200 dark:bg-green-950/20 dark:border-green-800' : 'bg-blue-50 border-blue-200 dark:bg-blue-950/20 dark:border-blue-800'}`}>
             <p class="text-sm font-medium text-foreground">
               {result.buyBetter ? '✅ Buying is the better financial choice' : '🏠 Renting is the better financial choice'}

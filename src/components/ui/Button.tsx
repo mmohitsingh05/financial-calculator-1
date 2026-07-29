@@ -43,7 +43,7 @@ export function Button({
     <button
       class={cn(
         'inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200 cursor-pointer',
-        'focus:outline-none focus:ring-4 focus:ring-ring focus:ring-offset-2',
+        'focus:outline-none focus:ring-4 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background',
         'disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed',
         'select-none',
         variantStyles[variant],

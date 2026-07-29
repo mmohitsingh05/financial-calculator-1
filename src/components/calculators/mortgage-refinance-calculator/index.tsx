@@ -56,14 +56,14 @@ export function MortgageRefinanceCalculator() {
     <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
-          <h3 class="text-lg font-semibold text-foreground">Payment Comparison</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground">Payment Comparison</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <ResultsDisplay label="Current Monthly Payment" value={result.currentPayment} />
             <ResultsDisplay label="New Monthly Payment" value={result.newPayment} />
           </div>
           <ResultsDisplay label="Monthly Savings" value={result.monthlySavings} highlight={result.isBeneficial} />
           <ResultsDisplay label="Break-Even Point" value={`${result.breakEvenMonths} months`} highlight={result.isBeneficial} />
-          <h3 class="text-lg font-semibold text-foreground pt-3">Total Interest Over Loan Life</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground pt-3">Total Interest Over Loan Life</h3>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <ResultsDisplay label="Current Loan Interest" value={result.currentTotalInterest} />
             <ResultsDisplay label="New Loan Interest" value={result.newTotalInterest} />

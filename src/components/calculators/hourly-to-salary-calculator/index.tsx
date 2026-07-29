@@ -47,14 +47,14 @@ export function HourlyToSalaryCalculator() {
     <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
-          <h3 class="text-lg font-semibold text-foreground">Annual Salary</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground">Annual Salary</h3>
           <ResultsDisplay label="Annual Salary" value={result.annualSalary} highlight />
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <ResultsDisplay label="Monthly Pay" value={result.monthly} />
             <ResultsDisplay label="Bi-Weekly Pay" value={result.biweekly} />
             <ResultsDisplay label="Weekly Pay" value={result.weekly} />
           </div>
-          <h3 class="text-lg font-semibold text-foreground pt-3">Rate Breakdown</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground pt-3">Rate Breakdown</h3>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <ResultsDisplay label="Hourly Rate" value={result.hourlyRate} />
             <ResultsDisplay label="Overtime Rate (1.5x)" value={result.overtimeRate} />

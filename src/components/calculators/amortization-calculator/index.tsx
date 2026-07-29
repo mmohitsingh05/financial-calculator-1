@@ -39,15 +39,15 @@ export function AmortizationCalculator() {
     <CalculatorForm fields={fields} values={values} displayValues={form.displayValues} errors={form.errors} touched={form.touched} onChange={form.setValue} onCalculate={handleCalculate} onReset={handleReset}>
       {result && (
         <div class="mt-6 space-y-3">
-          <h3 class="text-lg font-semibold text-foreground">Monthly Payment</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground">Monthly Payment</h3>
           <ResultsDisplay label="Monthly Payment" value={result.monthlyPayment} highlight />
-          <h3 class="text-lg font-semibold text-foreground pt-3">Loan Summary</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground pt-3">Loan Summary</h3>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <ResultsDisplay label="Loan Amount" value={result.loanAmount} />
             <ResultsDisplay label="Total Interest Paid" value={result.totalInterest} />
             <ResultsDisplay label="Total of All Payments" value={result.totalPayment} />
           </div>
-          <h3 class="text-lg font-semibold text-foreground pt-3">Amortization Schedule</h3>
+          <h3 class="text-base sm:text-lg font-semibold text-foreground pt-3">Amortization Schedule</h3>
           <AmortizationTable schedule={result.schedule} maxRows={10} />
         </div>
       )}
