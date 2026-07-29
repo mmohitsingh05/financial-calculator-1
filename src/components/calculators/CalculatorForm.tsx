@@ -110,9 +110,13 @@ export function CalculatorForm({
   children,
 }: CalculatorFormProps) {
   const display = displayValues || values
+  let resultsRef: HTMLDivElement | null = null
   const handleSubmit = (e: Event) => {
     e.preventDefault()
     onCalculate()
+    setTimeout(() => {
+      resultsRef?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
   }
 
   return (
@@ -173,7 +177,7 @@ export function CalculatorForm({
         )}
       </div>
 
-      {children && <div class="animate-scale-in">{children}</div>}
+      {children && <div ref={el => resultsRef = el} class="animate-scale-in">{children}</div>}
     </form>
   )
 }
